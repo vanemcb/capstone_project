@@ -41,17 +41,13 @@ app.post("/add_salary", async (req, res) => {
 			const { field } = answers[field];
 			const new_survey { field } = await pool.query("INSERT INTO survey ($1) VALUES($2) RETURNING *",[field], [answers[field]]);
 			res.json(new_survey.rows);
-		}
-
-
-		const { survey_id } = req.body;
-		res.json(newTodo.rows[0]);
+		};
 	} catch (err) {
 		console.error(err.message);
 	}
 })
 
-//get all todos
+/*get all todos
 app.get("/todos", async (req, res) => {
 	try {
 		const allTodos = await pool.query("SELECT * FROM todo")
@@ -95,7 +91,7 @@ app.delete("/todos/:id", async (req, res) => {
 	} catch (err) {
 		console.error(err.message);
 	}
-})
+})*/
 
 app.listen(5000, () => {
 	console.log("SERVER running propertly on port 5000")
