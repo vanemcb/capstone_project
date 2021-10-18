@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 //create app which is coint to take express library and run it
 const cors = require("cors");
-const pool = require("./db")
+const pool = require("./db");
 
 
 //MIDDLEWARE//
@@ -26,7 +26,8 @@ const survey_fields = [
 	"company_location",
 	"business_field",
 	"compensation",
-	]
+	"user"
+];
 
 //ROUTES//
 
@@ -34,16 +35,12 @@ const survey_fields = [
 app.post("/add_salary", async (req, res) => {
 
 	try {
-		const answers = req.body
+		//const key = req.body["survey_id"];
+		const answers = req.body;
 		for (const field in survey_fields) {
 			const { field } = answers[field];
-			const new_survey = await pool.query("INSERT INTO todo ($1) VALUES($2) RETURNING *",[field[0], field[1]]);
-
-			const { description } = req.body;
-			const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *",
-				[description]);
-			res.json(newTodo.rows[0]);
-
+			const new_survey { field } = await pool.query("INSERT INTO survey ($1) VALUES($2) RETURNING *",[field], [answers[field]]);
+			res.json(new_survey.rows);
 		}
 
 

@@ -16,10 +16,10 @@ CREATE TABLE survey (
 	currency VARCHAR(32),
 	title VARCHAR(128),
 	level VARCHAR(64),
-	total_xp FLOAT,
-	at_company_xp FLOAT,
+	total_xp INT,
+	at_company_xp INT,
 	company VARCHAR(128),
 	company_location VARCHAR(128),
 	business_field VARCHAR(128),
-	compensation VARCHAR
+	compensation VARCHAR,
 	);
