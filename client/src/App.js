@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// sample dictionary
+import filled_survey from './Sample/filled_survey.json'
+
+// components
+import Survey from './Components/survey'
+
+class App extends Component {
+
+    state = {
+        filled_survey: filled_survey
+    }
+
+    addSurvey = (new_survey) => {
+        filled_survey.push(new_survey)
+        console.log(new_survey)
+        console.log(filled_survey)
+    }
+
+    render() {
+        return <div>
+            <Survey addSurvey={this.addSurvey} />
+        </div >
+    }
 }
 
 export default App;
