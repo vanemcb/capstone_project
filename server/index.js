@@ -16,7 +16,6 @@ app.use(express.json());
 app.post("/add_salary", async (req, res) => {
 	try {
 		const answers = req.body;
-		console.log(req.body);
 		let new_survey = {};
 		new_survey = await pool.query("INSERT INTO survey (gender, english_level, coding_learning,\
 			education_level, salary, bonus, currency, title, level, total_xp,\
@@ -28,7 +27,6 @@ app.post("/add_salary", async (req, res) => {
 			"+ answers["total_xp"] + ", " + answers["at_company_xp"] + ", \
 			'" + answers["company"] + "', '" + answers["company_location"] + "', \
 			'" + answers["business_field"] + "', '" + answers["compensation"] + "') RETURNING *");
-		console.log("FINALIZADO");
 		res.json(new_survey.rows);
 	} catch (err) {
 		console.log(err);
@@ -49,7 +47,7 @@ app.get("/survey", async (req, res) => {
 app.get("/survey/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const single_survey = await pool.query("SELECT * FROM survey WHERE survey_id = $1", [id]);
+    const single_survey = await pool.query("SELECT * FROM survey WHERE id = $1", [id]);
     res.json(single_survey.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -58,29 +56,37 @@ app.get("/survey/:id", async (req, res) => {
 
 //update a survey
 app.put("/survey/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const answers = req.body;
-    for (const field in survey_fields) {
-      const { field } = answers[field];
-      const update_survey { field } = await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2", [field], [answers[field]]);
-      res.json("Information successfully updated");
-  } catch (err) {
-    console.error(err.message);
-  }
+	try {
+		const answers = req.body;
+		const { id } = req.params;
+		let new_survey = {};
+		new_survey = await pool.query("UPDATE survey SET (gender, english_level, coding_learning,\
+			education_level, salary, bonus, currency, title, level, total_xp,\
+			at_company_xp, company, company_location, business_field, compensation) = \
+			('"+ answers["gender"] + "', '" + answers["english_level"] + "', '" + answers["coding_learning"] + "', \
+			'"+ answers["education_level"] + "', " + answers["salary"] + ", \
+			"+ answers["bonus"] + ", '" + answers["currency"] + "', \
+			'"+ answers["title"] + "', '" + answers["level"] + "', \
+			"+ answers["total_xp"] + ", " + answers["at_company_xp"] + ", \
+			'" + answers["company"] + "', '" + answers["company_location"] + "', \
+			'" + answers["business_field"] + "', '" + answers["compensation"] + "') WHERE id = " + id);
+		res.json(new_survey.rows);
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+//delete a todo
+app.delete("/survey/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const del_todo = await pool.query("DELETE FROM survey WHERE id = " + id);
+		res.json("Survey data deleted!");
+	} catch (err) {
+		console.error(err.message);
+	}
 })
 
-/*delete a todo
-app.delete("/todos/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const del_todo = await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
-    res.json("Todo was deleted");
-  } catch (err) {
-    console.error(err.message);
-  }
-})*/
-
 app.listen(5000, () => {
-  console.log("SERVER running propertly on port 5000")
+	console.log("SERVER running propertly on port 5000")
 });
