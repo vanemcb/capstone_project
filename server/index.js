@@ -17,6 +17,7 @@ app.post("/add_salary", async (req, res) => {
 	try {
 		const answers = req.body;
 		let new_survey = {};
+
 		new_survey = await pool.query("INSERT INTO survey (gender, english_level, coding_learning,\
 			education_level, salary, bonus, currency, title, level, total_xp,\
 			at_company_xp, company, company_location, business_field, compensation) \
