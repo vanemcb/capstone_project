@@ -9,43 +9,30 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 //it give us access to the request body to get json data
-const survey_fields = [
-  "id",
-  "login_id",
-  "gender",
-  "english_level",
-  "coding_learning",
-  "education_level",
-  "salary",
-  "bonus",
-  "currency",
-  "title",
-  "level",
-  "total_xp",
-  "at_company_xp",
-  "company",
-  "company_location",
-  "business_field",
-  "compensation",
-];
 
 //ROUTES//
 
 //submits a survey
 app.post("/add_salary", async (req, res) => {
-
-  try {
-    //const key = req.body["survey_id"];
-    const answers = req.body;
-    for (const field of survey_fields) {
-      let new_survey = {};
-      const { field } = answers[field];
-      new_survey[field] = await pool.query("INSERT INTO survey ($1) VALUES($2) RETURNING *",[field], [answers[field]]);
-      res.json(new_survey.rows);
-    };
-  } catch (err) {
-    console.error(err.message);
-  }
+	try {
+		const answers = req.body;
+		console.log(req.body);
+		let new_survey = {};
+		new_survey = await pool.query("INSERT INTO survey (gender, english_level, coding_learning,\
+			education_level, salary, bonus, currency, title, level, total_xp,\
+			at_company_xp, company, company_location, business_field, compensation) \
+			VALUES ('"+ answers["gender"] + "', '" + answers["english_level"] + "', '" + answers["coding_learning"] + "', \
+			'"+ answers["education_level"] + "', " + answers["salary"] + ", \
+			"+ answers["bonus"] + ", '" + answers["currency"] + "', \
+			'"+ answers["title"] + "', '" + answers["level"] + "', \
+			"+ answers["total_xp"] + ", " + answers["at_company_xp"] + ", \
+			'" + answers["company"] + "', '" + answers["company_location"] + "', \
+			'" + answers["business_field"] + "', '" + answers["compensation"] + "') RETURNING *");
+		console.log("FINALIZADO");
+		res.json(new_survey.rows);
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 //get all survey results
