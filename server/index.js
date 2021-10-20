@@ -14,24 +14,39 @@ app.use(express.json());
 
 //submits a survey
 app.post("/add_salary", async (req, res) => {
-	try {
-		const answers = req.body;
-		let new_survey = {};
+  try {
+    const answers = req.body;
+    let new_survey = {};
+    new_survey = await pool.query("INSERT INTO init_survey (company, company_location, job_position,\
+			job_level, years_of_experience, years_at_company, montly_salary, currency, bonus, frequency,\
+			gender) \
+			VALUES ('"+ answers["company"] + "', '" + answers["company_location"] + "', '" + answers["job_position"] + "', \
+			'"+ answers["job_level"] + "', " + answers["years_of_experience"] + ", \
+			"+ answers["years_at_company"] + ", '" + answers["montly_salary"] + "', \
+			'"+ answers["currency"] + "', '" + answers["bonus"] + "', \
+			'"+ answers["frequency"] + "', '" + answers["gender"] + "') RETURNING *");
+    res.json(new_survey.rows);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-		new_survey = await pool.query("INSERT INTO survey (gender, english_level, coding_learning,\
-			education_level, salary, bonus, currency, title, level, total_xp,\
-			at_company_xp, company, company_location, business_field, compensation) \
-			VALUES ('"+ answers["gender"] + "', '" + answers["english_level"] + "', '" + answers["coding_learning"] + "', \
-			'"+ answers["education_level"] + "', " + answers["salary"] + ", \
-			"+ answers["bonus"] + ", '" + answers["currency"] + "', \
-			'"+ answers["title"] + "', '" + answers["level"] + "', \
-			"+ answers["total_xp"] + ", " + answers["at_company_xp"] + ", \
-			'" + answers["company"] + "', '" + answers["company_location"] + "', \
-			'" + answers["business_field"] + "', '" + answers["compensation"] + "') RETURNING *");
-		res.json(new_survey.rows);
-	} catch (err) {
-		console.log(err);
-	}
+//test react
+app.post("/test", async (req, res) => {
+  try {
+    const answers = req.body;
+    let new_survey = {};
+
+    new_survey = await pool.query("INSERT INTO test (title, description) \
+      VALUES ('"+ answers["title"] + "', '" + answers["description"] + "') RETURNING *");
+    res.json(new_survey.rows);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/', function (req, res) {
+  res.write("HOLAAAAAA");
 });
 
 //get all survey results
@@ -39,6 +54,7 @@ app.get("/survey", async (req, res) => {
   try {
     const allsurvey = await pool.query("SELECT * FROM survey")
     res.json(allsurvey.rows);
+    
   } catch (err) {
     console.error(err.message);
   }
