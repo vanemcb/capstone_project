@@ -1,8 +1,10 @@
 const express = require('express')
-const { sequelize, Survey, User } = require('./models')
+const cors = require("cors");
 const functions = require('./functions.js')
+const { sequelize, Survey, User } = require('./models')
 
 const app = express()
+app.use(cors());
 app.use(express.json())
 
 //ROUTES//
@@ -91,7 +93,7 @@ app.delete("/survey/:uuid", async (req, res) => {
 			where: { uuid: uuid }
 		});
 		await survey.destroy();
-		return res.json({ message: 'Suvey successfully deleted~' });
+		return res.json({ message: 'Survey successfully deleted~' });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Survey not found' });
@@ -118,7 +120,7 @@ app.get("/by_company/:company_name", async (req, res) => {
 		});
 		const positions_list = [...new Set(survey.map(item => item.title))];
 		const benefits_list = [...new Set(survey.map(item => item.compensation))];
-		return res.json(survey);
+		return res.json({ "positions_list": positions_list, "benefits_list": benefits_list });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Survey not found' });
@@ -139,12 +141,16 @@ app.get("/by_company/:company_name/:title", async (req, res) => {
 			salaries_list.push(salaries["dataValues"]["salary"])
 			bonus_list.push(salaries["dataValues"]["bonus"])
 		}
+		const benefits_list = [...new Set(survey.map(item => item.compensation))];
 		const salary_by_level = functions.level_salary(survey);
 		const max_salary = Math.max(...salaries_list);
 		const min_salary = Math.min(...salaries_list);
 		average_salary = parseInt(functions.average(salaries_list));
 		average_bonus = parseInt(functions.average(bonus_list));
-		return res.json(survey);
+		return res.json({
+			"salary_by_level": salary_by_level, "salaries_list": salaries_list,
+			"average_salary": average_salary, "average_bonus": average_bonus, "benefits_list": benefits_list
+		});
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Survey not found' });
