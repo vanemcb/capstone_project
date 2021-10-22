@@ -10,34 +10,52 @@ const Survey = () => {
 
   const [company, setCompany] = useState("");
   const [company_location, setLocation] = useState("");
-  const [job_position, setPosition] = useState("");
-  const [job_level, setLevel] = useState("");
-  const [years_of_experience, setExpTotal] = useState("");
-  const [years_at_company, setExpCompany] = useState("");
-  const [monthly_salary, setSalary] = useState("");
+  const [title, setPosition] = useState("");
+  const [level, setLevel] = useState("");
+  const [total_xp, setExpTotal] = useState("");
+  const [at_company_xp, setExpCompany] = useState("");
+  const [salary, setSalary] = useState("");
   const [currency, setCurrency] = useState("");
   const [bonus, setBonus] = useState("");
   const [gender, setGender] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const onSubmitForm = async (e) => {
+    e.preventDefault();
     try {
-      const body = { company, company_location, job_position, job_level,
-        years_of_experience, years_at_company, monthly_salary, currency, bonus,
+      const body = {
+        company, company_location, title, level,
+        total_xp, at_company_xp, salary, currency, bonus,
         gender};
         await fetch("http://localhost:5000/add_salary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-    window.location = "/add_salary";
+    window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+  };
+
   return (
     <Fragment>
-      <Form onSubmit={onSubmitForm} style={{ width: 450, margin: "auto" }} className="mt-5">
+      <Form
+        onSubmit={onSubmitForm}
+        style={{ width: 450, margin: "auto" }}
+        className="mt-5"
+        noValidate
+        validated={validated}
+      >
         <Row className="mb-3">
           <Form.Group as={Col}>
             <FloatingLabel
@@ -50,7 +68,9 @@ const Survey = () => {
                 placeholder="Company"
                 value={company}
                 onChange={e => setCompany(e.target.value)}
+                required
               />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
 
@@ -82,8 +102,8 @@ const Survey = () => {
               className="mb-3"
             >
               <Form.Select
-                name="job_position"
-                value={job_position}
+                name="title"
+                value={title}
                 onChange={e => setPosition(e.target.value)}
               >
                 <option value="" disabled defaultValue hidden>Select...</option>
@@ -108,8 +128,8 @@ const Survey = () => {
               className="mb-3"
             >
               <Form.Select
-                name="job_level"
-                value={job_level}
+                name="level"
+                value={level}
                 onChange={e => setLevel(e.target.value)}
               >
                 <option value="" disabled defaultValue hidden>Select...</option>
@@ -131,10 +151,10 @@ const Survey = () => {
               className="mb-3"
             >
               <Form.Control
-                name="years_of_experience"
+                name="total_xp"
                 type="text"
                 placeholder="Years of Experience"
-                value={years_of_experience}
+                value={total_xp}
                 onChange={e => setExpTotal(e.target.value)}
               />
             </FloatingLabel>
@@ -146,10 +166,10 @@ const Survey = () => {
               className="mb-3"
             >
               <Form.Control
-                name="years_at_company"
+                name="at_company_xp"
                 type="text"
                 placeholder="Years at Company"
-                value={years_at_company}
+                value={at_company_xp}
                 onChange={e => setExpCompany(e.target.value)}
               />
             </FloatingLabel>
@@ -163,10 +183,10 @@ const Survey = () => {
               className="mb-3"
             >
               <Form.Control
-                name="monthly_salary"
+                name="salary"
                 type="text"
                 placeholder="Monthly Salary"
-                value={monthly_salary}
+                value={salary}
                 onChange={e => setSalary(e.target.value)}
               />
             </FloatingLabel>
