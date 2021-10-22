@@ -4,7 +4,7 @@ function average(nums) {
 	return nums.reduce((a, b) => (a + b)) / nums.length;
 }
 
-
+// Albanil memorial block
 function level_salary(survey) {
 	const l0_salaries = [];
 	const l1_salaries = [];
@@ -58,7 +58,32 @@ function level_salary(survey) {
 
 }
 
+function company_salary(survey) {
+	const company_salaries = {}
+	survey.forEach(e => company_salaries[e["dataValues"]["company"]] = {})
+	survey.forEach(e => company_salaries[e["dataValues"]["company"]][e["dataValues"]["level"]] = [])
+	survey.forEach(e => {
+		co_name = e["dataValues"]["company"]
+		company_salaries[co_name][e["dataValues"]["level"]].push(e["dataValues"]["salary"])
+	})
+	return company_salaries
+}
+
+function remove_null(array) {
+	const new_array = []
+	for (element of array) {
+		if (element != null) {
+			new_array.push(element)
+		} else {
+			continue
+		}
+	}
+	return new_array
+}
+
 survey_functions.average = average
 survey_functions.level_salary = level_salary
+survey_functions.remove_null = remove_null
+survey_functions.company_salary = company_salary
 
 module.exports = survey_functions;

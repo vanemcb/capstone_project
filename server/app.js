@@ -100,6 +100,20 @@ app.delete("/survey/:uuid", async (req, res) => {
 	}
 });
 
+
+//HOME --> Get 3 random companies and display its averages salaries by position
+app.get("/", async (req, res) => {
+	try {
+		const allsurvey = await Survey.findAll()
+		const salary_company = functions.company_salary(allsurvey)
+		console.log(salary_company)
+		return res.json(salary_company);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'Something went wrong' });
+	}
+});
+
 //gets all company names
 app.get("/by_company", async (req, res) => {
 	try {
@@ -119,8 +133,9 @@ app.get("/by_company/:company_name", async (req, res) => {
 			where: { company: company_name }
 		});
 		const positions_list = [...new Set(survey.map(item => item.title))];
-		const benefits_list = [...new Set(survey.map(item => item.compensation))];
-		return res.json({ "positions_list": positions_list, "benefits_list": benefits_list });
+		const benefits = [...new Set(survey.map(item => item.compensation))];
+		const benefits_list = functions.remove_null(benefits)
+		return res.json({ "positions_list": positions_list, "benefits": benefits_list });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Survey not found' });
@@ -141,15 +156,14 @@ app.get("/by_company/:company_name/:title", async (req, res) => {
 			salaries_list.push(salaries["dataValues"]["salary"])
 			bonus_list.push(salaries["dataValues"]["bonus"])
 		}
-		const benefits_list = [...new Set(survey.map(item => item.compensation))];
+		const benefits = [...new Set(survey.map(item => item.compensation))];
+		const benefits_list = functions.remove_null(benefits)
 		const salary_by_level = functions.level_salary(survey);
-		const max_salary = Math.max(...salaries_list);
-		const min_salary = Math.min(...salaries_list);
 		average_salary = parseInt(functions.average(salaries_list));
 		average_bonus = parseInt(functions.average(bonus_list));
 		return res.json({
 			"salary_by_level": salary_by_level, "salaries_list": salaries_list,
-			"average_salary": average_salary, "average_bonus": average_bonus, "benefits_list": benefits_list
+			"average_salary": average_salary, "average_bonus": average_bonus, "benefits": benefits_list
 		});
 	} catch (err) {
 		console.log(err);
