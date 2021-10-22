@@ -40,10 +40,9 @@ CREATE TABLE init_survey (
 	job_level VARCHAR(128),
 	years_of_experience FLOAT,
 	years_at_company FLOAT,
-	montly_salary INT,
+	monthly_salary INT,
 	currency VARCHAR(32),
 	bonus INT,
-	frequency VARCHAR(32),
 	gender VARCHAR(12)
 	);
 

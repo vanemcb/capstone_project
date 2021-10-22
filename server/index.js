@@ -18,13 +18,13 @@ app.post("/add_salary", async (req, res) => {
     const answers = req.body;
     let new_survey = {};
     new_survey = await pool.query("INSERT INTO init_survey (company, company_location, job_position,\
-			job_level, years_of_experience, years_at_company, montly_salary, currency, bonus, frequency,\
+			job_level, years_of_experience, years_at_company, monthly_salary, currency, bonus,\
 			gender) \
 			VALUES ('"+ answers["company"] + "', '" + answers["company_location"] + "', '" + answers["job_position"] + "', \
 			'"+ answers["job_level"] + "', " + answers["years_of_experience"] + ", \
-			"+ answers["years_at_company"] + ", '" + answers["montly_salary"] + "', \
+			"+ answers["years_at_company"] + ", '" + answers["monthly_salary"] + "', \
 			'"+ answers["currency"] + "', '" + answers["bonus"] + "', \
-			'"+ answers["frequency"] + "', '" + answers["gender"] + "') RETURNING *");
+			'" + answers["gender"] + "') RETURNING *");
     res.json(new_survey.rows);
   } catch (err) {
     console.log(err);
