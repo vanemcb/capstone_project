@@ -1,7 +1,9 @@
 const express = require('express')
+const cors = require("cors");
 const { sequelize, Survey, User } = require('./models')
 
 const app = express()
+app.use(cors());
 app.use(express.json())
 
 //ROUTES//

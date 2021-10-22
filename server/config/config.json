@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "roo",
-    "database": "compensation_test",
+    "password": "root",
+    "database": "compensation",
     "host": "localhost",
     "dialect": "postgres"
   },
