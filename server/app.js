@@ -106,7 +106,6 @@ app.get("/", async (req, res) => {
 	try {
 		const allsurvey = await Survey.findAll()
 		const salary_company = functions.company_salary(allsurvey)
-		console.log(salary_company)
 		return res.json(salary_company);
 	} catch (err) {
 		console.log(err);
@@ -159,8 +158,10 @@ app.get("/by_company/:company_name/:title", async (req, res) => {
 		const benefits = [...new Set(survey.map(item => item.compensation))];
 		const benefits_list = functions.remove_null(benefits)
 		const salary_by_level = functions.level_salary(survey);
-		average_salary = parseInt(functions.average(salaries_list));
-		average_bonus = parseInt(functions.average(bonus_list));
+		const max_salary = Math.max(...salaries_list);
+		const min_salary = Math.min(...salaries_list);
+		average_salary = functions.average(salaries_list);
+		average_bonus = functions.average(bonus_list);
 		return res.json({
 			"salary_by_level": salary_by_level, "salaries_list": salaries_list,
 			"average_salary": average_salary, "average_bonus": average_bonus, "benefits": benefits_list
@@ -168,6 +169,169 @@ app.get("/by_company/:company_name/:title", async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Survey not found' });
+	}
+});
+
+//gets salaries, salaries by company and latest entries for a given postion
+app.get("/by_position/:position", async (req, res) => {
+	const position = req.params.position;
+	try {
+		const survey = await Survey.findAll({
+			where: { title: position }
+		});
+		const salary_company = functions.postion_salary(survey)
+		const salaries_list = [];
+		const bonus_list = [];
+		let pos_avg_salary;
+		for (salaries of survey) {
+			salaries_list.push(salaries["dataValues"]["salary"])
+			bonus_list.push(salaries["dataValues"]["bonus"])
+		}
+		if (salaries_list.length > 0) {
+			pos_avg_salary = functions.average(salaries_list);
+		}
+		const recent_entries = await functions.last_entries(position)
+		return res.json({
+			"salaries_by_company": salary_company, "salaries": salaries_list,
+			"bonus": bonus_list, "postion_avg_salary": pos_avg_salary,
+			"last_entries": recent_entries
+		});
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
+	}
+});
+
+//gets salaries, salaries by company and latest entries for a given postion and gender
+app.get("/by_position/:position/gender", async (req, res) => {
+	const position = req.params.position;
+	try {
+		const survey = await Survey.findAll({
+			where: { title: position }
+		});
+		const salary_company = functions.postion_salary_filter(survey, "gender")
+		const salaries_list = [];
+		const bonus_list = [];
+		let pos_avg_salary;
+		for (salaries of survey) {
+			salaries_list.push(salaries["dataValues"]["salary"])
+			bonus_list.push(salaries["dataValues"]["bonus"])
+		}
+		if (salaries_list.length > 0) {
+			pos_avg_salary = functions.average(salaries_list);
+		}
+		const recent_entries = await functions.last_entries(position)
+		return res.json({
+			"salaries_by_company": salary_company, "salaries": salaries_list,
+			"bonus": bonus_list, "postion_avg_salary": pos_avg_salary,
+			"last_entries": recent_entries
+		});
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
+	}
+});
+
+//gets salaries, salaries by company and latest entries for a given postion and experience
+app.get("/by_position/:position/experience", async (req, res) => {
+	const position = req.params.position;
+	try {
+		const survey = await Survey.findAll({
+			where: { title: position }
+		});
+		const salary_company = functions.postion_salary_filter(survey, "total_xp")
+		const salaries_list = [];
+		const bonus_list = [];
+		let pos_avg_salary;
+		for (salaries of survey) {
+			salaries_list.push(salaries["dataValues"]["salary"])
+			bonus_list.push(salaries["dataValues"]["bonus"])
+		}
+		if (salaries_list.length > 0) {
+			pos_avg_salary = functions.average(salaries_list);
+		}
+		const recent_entries = await functions.last_entries(position)
+		return res.json({
+			"salaries_by_company": salary_company, "salaries": salaries_list,
+			"bonus": bonus_list, "postion_avg_salary": pos_avg_salary,
+			"last_entries": recent_entries
+		});
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
+	}
+});
+
+//gets salaries, salaries by company and latest entries for a given postion and english level
+app.get("/by_position/:position/english", async (req, res) => {
+	const position = req.params.position;
+	try {
+		const survey = await Survey.findAll({
+			where: { title: position }
+		});
+		const salary_company = functions.postion_salary_filter(survey, "english_level")
+		const salaries_list = [];
+		const bonus_list = [];
+		let pos_avg_salary;
+		for (salaries of survey) {
+			salaries_list.push(salaries["dataValues"]["salary"])
+			bonus_list.push(salaries["dataValues"]["bonus"])
+		}
+		if (salaries_list.length > 0) {
+			pos_avg_salary = functions.average(salaries_list);
+		}
+		const recent_entries = await functions.last_entries(position)
+		return res.json({
+			"salaries_by_company": salary_company, "salaries": salaries_list,
+			"bonus": bonus_list, "postion_avg_salary": pos_avg_salary,
+			"last_entries": recent_entries
+		});
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
+	}
+});
+
+//gets salaries, salaries by company and latest entries for a given postion and company location
+app.get("/by_position/:position/location", async (req, res) => {
+	const position = req.params.position;
+	try {
+		const survey = await Survey.findAll({
+			where: { title: position }
+		});
+		const salary_company = functions.postion_salary_filter(survey, "company_location")
+		const salaries_list = [];
+		const bonus_list = [];
+		let pos_avg_salary;
+		for (salaries of survey) {
+			salaries_list.push(salaries["dataValues"]["salary"])
+			bonus_list.push(salaries["dataValues"]["bonus"])
+		}
+		if (salaries_list.length > 0) {
+			pos_avg_salary = functions.average(salaries_list);
+		}
+		const recent_entries = await functions.last_entries(position)
+		return res.json({
+			"salaries_by_company": salary_company, "salaries": salaries_list,
+			"bonus": bonus_list, "postion_avg_salary": pos_avg_salary,
+			"last_entries": recent_entries
+		});
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
+	}
+});
+
+//returns general information of survey population like english level, gender, etc
+app.get("/:filter", async (req, res) => {
+	const filter = req.params.filter;
+	try {
+		const survey = await Survey.findAll();
+		const general_filters = functions.general_filters(survey, filter)
+		return res.json(general_filters);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ error: 'No data found' });
 	}
 });
 

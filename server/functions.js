@@ -1,7 +1,8 @@
+const { sequelize, Survey, User } = require('./models')
 survey_functions = {}
 
 function average(nums) {
-	return nums.reduce((a, b) => (a + b)) / nums.length;
+	return parseInt(nums.reduce((a, b) => (a + b)) / nums.length);
 }
 
 // Albanil memorial block
@@ -66,7 +67,70 @@ function company_salary(survey) {
 		co_name = e["dataValues"]["company"]
 		company_salaries[co_name][e["dataValues"]["level"]].push(e["dataValues"]["salary"])
 	})
+	for (const co in company_salaries) {
+		for (const sal in company_salaries[co]) {
+			company_salaries[co][sal] = average(company_salaries[co][sal])
+		}
+	}
 	return company_salaries
+}
+
+function postion_salary(survey) {
+	const company_salaries = {}
+	survey.forEach(e => company_salaries[e["dataValues"]["company"]] = [])
+	survey.forEach(e => {
+		co_name = e["dataValues"]["company"]
+		company_salaries[co_name].push(e["dataValues"]["salary"])
+	})
+	for (const co in company_salaries) {
+		company_salaries[co] = average(company_salaries[co])
+	}
+	return company_salaries
+}
+
+function postion_salary_filter(survey, filter) {
+	const filter_salaries = {}
+	survey.forEach(e => filter_salaries[e["dataValues"]["company"]] = {})
+	survey.forEach(e => filter_salaries[e["dataValues"]["company"]][e["dataValues"][filter]] = [])
+	survey.forEach(e => {
+		co_name = e["dataValues"]["company"]
+		filter_salaries[co_name][e["dataValues"][filter]].push(e["dataValues"]["salary"])
+	})
+	for (const co in filter_salaries) {
+		for (const sal in filter_salaries[co]) {
+			filter_salaries[co][sal] = average(filter_salaries[co][sal])
+		}
+	}
+	return filter_salaries
+}
+
+function general_filters(survey, filter) {
+	const general_filter = {}
+	survey.forEach(e => {
+		if (typeof general_filter[e["dataValues"][filter]] === 'undefined') {
+			general_filter[e["dataValues"][filter]] = 0
+		}
+		general_filter[e["dataValues"][filter]] += 1
+	})
+	return general_filter
+}
+
+async function last_entries(position) {
+	const survey = await Survey.findAll({
+		where: { title: position }, order: [['createdAt', 'DESC']], limit: 15
+	});
+	const entries_list = []
+	const entries_fields = ["company", "createdAt", "level", "total_xp", "at_company_xp", "salary", "bonus"]
+	for (registry of survey) {
+		const recent_entries = {}
+		for (fields in registry["dataValues"]) {
+			if (entries_fields.includes(fields)) {
+				recent_entries[fields] = registry["dataValues"][fields]
+			}
+		}
+		entries_list.push(recent_entries)
+	}
+	return entries_list
 }
 
 function remove_null(array) {
@@ -85,5 +149,9 @@ survey_functions.average = average
 survey_functions.level_salary = level_salary
 survey_functions.remove_null = remove_null
 survey_functions.company_salary = company_salary
+survey_functions.postion_salary = postion_salary
+survey_functions.last_entries = last_entries
+survey_functions.postion_salary_filter = postion_salary_filter
+survey_functions.general_filters = general_filters
 
 module.exports = survey_functions;
