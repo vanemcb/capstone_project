@@ -3,12 +3,14 @@ import './App.css';
 
 // components
 import Survey from './Components/survey'
+import BarChart from './Components/BarChart'
 
 function App() {
   return (
     <Fragment>
       <div className="container">
-        <Survey />
+        <Survey/>
+        <BarChart/>
       </div>
     </Fragment>
   );
