@@ -1,38 +1,31 @@
 import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import './App.css';
 
-// components
-import Survey from './Components/survey'
-import BarChart from './Components/BarChart'
+//Pages
+import Home from './Pages/Home';
+import AddSalary from './Pages/add_salary';
+import ByCompany from './Pages/by_company';
+
 
 function App() {
   return (
-    <Fragment>
-      <div className="container">
-        <Survey/>
-        <BarChart/>
-      </div>
-    </Fragment>
+
+    <Router>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+
+      <Route path="/add_salary" exact>
+        <AddSalary />
+      </Route>
+
+      <Route path="/by_company" exact>
+        <ByCompany/>
+      </Route>
+    </Router>
+    
   );
 };
-
-// class App extends Component {
-
-//     state = {
-//         filled_survey: filled_survey
-//     }
-
-//     addSurvey = (new_survey) => {
-//         filled_survey.push(new_survey)
-//         console.log(new_survey)
-//         console.log(filled_survey)
-//     }
-
-//     render() {
-//         return <div>
-//             <Survey addSurvey={this.addSurvey} />
-//         </div >
-//     }
-// }
 
 export default App;

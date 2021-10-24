@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-const BarChart = () => {
+const DouByCompany = () => {
   
   const [dict, setDict] = useState([]);
   const getDict = async () => {
@@ -14,39 +14,26 @@ const BarChart = () => {
     }
   };
 
-  const level_list = [];
-  for (const key in dict.salary_by_level) {
-    level_list.push(dict.salary_by_level[key]);
-  }
-
   useEffect(() => {
     getDict();
   }, []);
 
   return (
     <div>
-      <Bar
+      <Doughnut
         data={{
-          labels: ['L0', 'L1', 'L2', 'L3', 'L4', 'L5'],
+          labels: ['Average Salary', 'Average Bonus'],
           datasets: [
             {
-              label: 'SALARY VS LEVEL',
-              data: level_list,
+              label: 'AVERAGE',
+              data: [ dict.average_salary, dict.average_bonus],
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
               ],
               borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
               ],
               borderWidth: 0.5,
             },
@@ -80,4 +67,4 @@ const BarChart = () => {
   )
 }
 
-export default BarChart;
+export default DouByCompany;

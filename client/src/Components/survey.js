@@ -32,7 +32,7 @@ const Survey = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-    window.location = "/";
+    window.location = "/add_salary";
     } catch (err) {
       console.error(err.message);
     }
@@ -218,8 +218,8 @@ const Survey = () => {
                 onChange={e => setCurrency(e.target.value)}
               >
                 <option value="" disabled defaultValue hidden>Select...</option>
-                <option value="cop">CoP</option>
-                <option value="usd">U$D</option>
+                <option value="COP">CoP</option>
+                <option value="USD">U$D</option>
                 <option value="euro">Euro</option>
                 <option value="brazilian_real">Brazilian Real</option>
                 <option value="chilean_peso">Chilean Peso</option>
