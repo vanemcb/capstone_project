@@ -1,13 +1,43 @@
 const express = require('express')
-const cors = require("cors");
 const functions = require('./functions.js')
 const { sequelize, Survey, User } = require('./models')
+const cron = require('node-cron');
+const axios = require('axios');
+const fs = require('fs');
+const { bonus_to_dollars } = require('./functions.js');
 
 const app = express()
-app.use(cors());
 app.use(express.json())
 
-//ROUTES//
+
+// usd_cop_rate() function is called a hour 1 of every day to get
+// the current USD/COP rate
+// the follow schema shows how to set the time of the cron job
+// # ┌────────────── second(optional)
+//  # │ ┌──────────── minute
+//  # │ │ ┌────────── hour
+//  # │ │ │ ┌──────── day of month
+//  # │ │ │ │ ┌────── month
+//  # │ │ │ │ │ ┌──── day of week
+//  # │ │ │ │ │ │
+//  # │ │ │ │ │ │
+//  # * * * * * *
+cron.schedule('* 1 * * *', async function usd_cop_rate() {
+	const exchange_rate = {}
+	try {
+		const response = await axios.get('https://api.currencyfreaks.com/latest?apikey=4f74f47f67724b2fafd71a1e8317481c')
+		exchange_rate['usdcop'] = response.data.rates["COP"]
+		fs.writeFile('./exchange_rate.json', JSON.stringify(exchange_rate), err => {
+			if (err) {
+				console.error(err)
+				return
+			}
+			console.log("File created!\n")
+		})
+	} catch (error) {
+		console.error(error)
+	}
+});
 
 //submits a survey
 app.post("/add_salary", async (req, res) => {
@@ -31,6 +61,8 @@ app.post("/add_salary", async (req, res) => {
 app.get("/survey", async (req, res) => {
 	try {
 		const allsurvey = await Survey.findAll()
+		const rate = functions.get_rate()
+		console.log(rate)
 		return res.json(allsurvey);
 	} catch (err) {
 		console.log(err);
@@ -152,8 +184,9 @@ app.get("/by_company/:company_name/:title", async (req, res) => {
 		const salaries_list = [];
 		const bonus_list = [];
 		for (salaries of survey) {
-			salaries_list.push(salaries["dataValues"]["salary"])
-			bonus_list.push(salaries["dataValues"]["bonus"])
+			usd_salary = functions.to_dollars(salaries)
+			salaries_list.push(usd_salary)
+			bonus_list.push(bonus_to_dollars(salaries))
 		}
 		const benefits = [...new Set(survey.map(item => item.compensation))];
 		const benefits_list = functions.remove_null(benefits)
@@ -335,9 +368,9 @@ app.get("/:filter", async (req, res) => {
 	}
 });
 
-
 app.listen({ port: 5000 }, async () => {
 	console.log("Server up on port 5000")
 	await sequelize.authenticate()
 	console.log("Database correctly CONNECTED")
 });
+
