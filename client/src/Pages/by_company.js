@@ -72,11 +72,6 @@ const ByCompany = () => {
       <FooterBar />
     </Fragment>
 
-
-    
-
-      
-
   );
 };
 
