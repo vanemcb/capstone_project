@@ -48,35 +48,10 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PopOver({ company, open, handleClose }) {
+export default function PopOver({ company, open, handleClose, title}) {
 
   const preventDefault = (event) => event.preventDefault();
-  const [title, setTitle] = useState(null);
-  //const [loading, setLoading] = useState(true);
-  //const [error, setError] = useState(null);
-
-  const url = "http://localhost:5000/by_company/" + company;
-  console.log(url);
-  const getTodos = async (url) => {
-    try {
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      setTitle(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getTodos();
-  }, []);
-
-
-  
-  console.log(title)
-  
-
-
+  //console.log(title)
   return (
     <div>
       <BootstrapDialog
@@ -100,24 +75,13 @@ export default function PopOver({ company, open, handleClose }) {
             }}
             onClick={preventDefault}
           >
-            <Link href="#" underline="hover">
-              Software Engineer +
-            </Link>
-            <Link href="#" underline="hover">
-              Machine Learning +
-            </Link>
-            <Link href="#" underline="hover">
-              Full Stack +
-            </Link>
-            <Link href="#" underline="hover">
-              API +
-            </Link>
-            <Link href="#" underline="hover">
-              Data +
-            </Link>
-            <Link href="#" underline="hover">
-              DevOps +
-            </Link>
+            {/* {title['positions_list'].map(value =>(
+              <Link href="#" underline="hover">
+                {value}
+              </Link>
+            ))}
+             */}
+
 
           </Box>
 
@@ -126,7 +90,7 @@ export default function PopOver({ company, open, handleClose }) {
 
         </DialogContent>
       </BootstrapDialog>
-    </div>    
+    </div>
   );
 }
 

@@ -14,19 +14,29 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const ListCompanies= () => {
 
-  const setValue = (event) => setCompany(event.target.id)
   const [data, setData] = useState(null);  
+  const [title, setTitle] = useState(null);  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [company, setCompany] = useState("");
   const [open, setOpen] = useState(false);
+  const setValue = (event) => setCompany(event.target.id)
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async (e) => {
+    setValue(e);
+    console.log(e.target.id);
     setOpen(true);
-  };
+    //getTitles(e.target.id);
+    //setInterval(getTitles(e.target.id), 1000);
+    console.log(title);
+    };
+    
+  //console.log(title);
   const handleClose = () => {
     setOpen(false);
   };
+
+ 
 
   useEffect(() => {
     fetch("http://localhost:5000/by_company")
@@ -47,11 +57,48 @@ const ListCompanies= () => {
         setLoading(false);
       });
   }, []);
+
+
+  const getTitles = async (comp) => {
+    try {
+      console.log(comp);
+      const response = await fetch("http://localhost:5000/by_company/" + comp);
+      const jsonData = await response.json();
+      setTitle(jsonData);
+      console.log(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  // async function getTitles(comp) {
+  //   console.log(comp);
+  //   console.log("http://localhost:5000/by_company/" + comp)
+  //   await fetch("http://localhost:5000/by_company/" + comp)
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       }
+  //       throw response;
+  //     })
+  //     .then(data => {
+  //       setTitle(data);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data: ", error);
+  //       setError(error);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }; 
+  
+
   if (loading) return "Loading...";
   if (error) return "Error!";
 
-  console.log(company);
-
+  
   return (
     <Fragment>
       <Box style={{ width: 700, margin: "auto" }} className="mt-5">
@@ -60,16 +107,21 @@ const ListCompanies= () => {
             <Grid item xs={2} sm={4} md={4} key={value}>
               <Item
                 type="button"
-                onClick={(e) => { handleClickOpen(e); setValue(e)}}
                 id={value}
+                onClick={(e) => { handleClickOpen(e) }}
                 >{value}
               </Item>
             </Grid>
           ))}
         </Grid>
       </Box>
-
-      <PopOver open={open} company={company} handleClose={handleClose}/>
+      {/* {title['positions_list'].map(value =>(
+              <h1>
+                {value}
+              </h1>
+      ))}
+             */}
+      <PopOver open={open} company={company} handleClose={handleClose} title={title}/>
 
     </Fragment>
   );
