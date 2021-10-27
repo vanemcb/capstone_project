@@ -9,23 +9,28 @@ import ByCompany from './Pages/by_company';
 
 
 function App() {
-    return (
+  return (
 
-        <Router>
-            <Route path="/" exact>
-                <Home />
-            </Route>
+    <Router>
+      <Route path="/" exact>
+        <Home />
+      </Route>
 
-            <Route path="/add_salary" exact>
-                <AddSalary />
-            </Route>
+      <Route path="/add_salary" exact>
+        <AddSalary />
+      </Route>
 
-            <Route path="/by_company" exact>
-                <ByCompany />
-            </Route>
-        </Router>
+      <Route path="/by_company" exact>
+        <ByCompany/>
+      </Route>
 
-    );
+      <Route path="/by_company/charts" exact>
+        
+      </Route>
+
+    </Router>
+    
+  );
 };
 
 export default App;
