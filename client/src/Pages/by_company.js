@@ -7,19 +7,19 @@ import ListCompanies from "../Components/ListCompanies";
 
 const ByCompany = () => {
 
-  return (
-    <Fragment>
-      <Navigation />
-      <div class="row">
-        <div className="container">
-          <ListCompanies />
-          
-        </div>
-      </div>
-      <FooterBar />
-    </Fragment>
+    return (
+        <Fragment>
+            <Navigation />
+            <div class="row">
+                <div className="container">
+                    <ListCompanies />
 
-  );
+                </div>
+            </div>
+            <FooterBar />
+        </Fragment>
+
+    );
 };
 
 export default ByCompany;
