@@ -4,6 +4,7 @@ import FooterBar from "../Components/footer";
 import ListCompanies from "../Components/ListCompanies";
 
 
+
 const ByCompany = () => {
 
   return (

@@ -50,8 +50,6 @@ BootstrapDialogTitle.propTypes = {
 
 export default function PopOver({ company, open, handleClose, title}) {
 
-  const preventDefault = (event) => event.preventDefault();
-  //console.log(title)
   return (
     <div>
       <BootstrapDialog
@@ -73,18 +71,15 @@ export default function PopOver({ company, open, handleClose, title}) {
                 ml: 2,
               },
             }}
-            onClick={preventDefault}
+           
           >
-            {/* {title['positions_list'].map(value =>(
-              <Link href="#" underline="hover">
-                {value}
-              </Link>
-            ))}
-             */}
-
-
+            {title.length !== 0 && title.positions_list ?
+              title['positions_list'].map(value => (
+                <Link href="/by_company/charts" underline="hover">
+                  {value}
+                </Link>
+              )) : null}
           </Box>
-
         </DialogContent>
         <DialogContent>
 

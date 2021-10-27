@@ -23,6 +23,11 @@ function App() {
       <Route path="/by_company" exact>
         <ByCompany/>
       </Route>
+
+      <Route path="/by_company/charts" exact>
+        
+      </Route>
+
     </Router>
     
   );

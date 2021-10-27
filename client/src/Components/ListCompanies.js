@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const ListCompanies= () => {
 
   const [data, setData] = useState(null);  
-  const [title, setTitle] = useState(null);  
+  const [title, setTitle] = useState([]);  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [company, setCompany] = useState("");
@@ -23,11 +23,12 @@ const ListCompanies= () => {
   const setValue = (event) => setCompany(event.target.id)
 
   const handleClickOpen = async (e) => {
+    const title2 = await getTitles(e.target.id);
     setValue(e);
+    setTitle(title2);
     console.log(e.target.id);
     setOpen(true);
-    getTitles(e.target.id);
-    console.log(title);
+    console.log(title2);
     };
     
   //console.log(title);
@@ -63,35 +64,14 @@ const ListCompanies= () => {
       //console.log(comp);
       const response = await fetch("http://localhost:5000/by_company/" + comp);
       const jsonData = await response.json();
-      setTitle(jsonData);
+      //setTitle(jsonData);
       //console.log(jsonData);
+      return jsonData;
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  // async function getTitles(comp) {
-  //   console.log(comp);
-  //   console.log("http://localhost:5000/by_company/" + comp)
-  //   await fetch("http://localhost:5000/by_company/" + comp)
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       throw response;
-  //     })
-  //     .then(data => {
-  //       setTitle(data);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data: ", error);
-  //       setError(error);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }; 
   
 
   if (loading) return "Loading...";
@@ -107,19 +87,15 @@ const ListCompanies= () => {
               <Item
                 type="button"
                 id={value}
-                onClick={(e) => { handleClickOpen(e) }}
+                onClick={handleClickOpen}
                 >{value}
               </Item>
             </Grid>
           ))}
         </Grid>
       </Box>
-      {/* {title['positions_list'].map(value =>(
-              <h1>
-                {value}
-              </h1>
-      ))}
-             */}
+
+            
       <PopOver open={open} company={company} handleClose={handleClose} title={title}/>
 
     </Fragment>
