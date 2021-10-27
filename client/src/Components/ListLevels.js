@@ -32,7 +32,7 @@ const ListLevels = () => {
     const company = "PANDEV"
     const index = companies.indexOf(company);
     console.log(index);
-    //const ran = companies[Math.floor(Math.random() * companies.length)];
+    const ran = Math.floor(Math.random() * 1000);
 
     const list_levels = [];
 
@@ -52,7 +52,7 @@ const ListLevels = () => {
             <div class="btn-group-vertical btn-group-lg" role="group">
                 {Object.keys(list_levels[index]).map(key => (
 
-                    <button type="button" class="btn btn-info" key={list_levels[index][key]}
+                    <button type="button" class="btn btn-info" key={ran}
                         style={{
                             background: '#E4D8DC',
                             width: 'flex'

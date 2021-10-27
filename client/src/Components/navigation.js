@@ -41,7 +41,7 @@ const Navigation = () => {
                         >
                             <NavDropdown title="Salaries">
                                 <NavDropdown.Item href="/by_company">By Company</NavDropdown.Item>
-                                <NavDropdown.Item href="#action5">
+                                <NavDropdown.Item href="/by_position">
                                     By Position
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
