@@ -26,8 +26,7 @@ const ListCompanies= () => {
     setValue(e);
     console.log(e.target.id);
     setOpen(true);
-    //getTitles(e.target.id);
-    //setInterval(getTitles(e.target.id), 1000);
+    getTitles(e.target.id);
     console.log(title);
     };
     
@@ -61,11 +60,11 @@ const ListCompanies= () => {
 
   const getTitles = async (comp) => {
     try {
-      console.log(comp);
+      //console.log(comp);
       const response = await fetch("http://localhost:5000/by_company/" + comp);
       const jsonData = await response.json();
       setTitle(jsonData);
-      console.log(jsonData);
+      //console.log(jsonData);
     } catch (err) {
       console.error(err.message);
     }
