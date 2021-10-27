@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
 import ListCompanies from "../Components/ListCompanies";
