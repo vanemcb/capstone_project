@@ -5,7 +5,7 @@ import { auto } from 'async';
 
 const filter = createFilterOptions();
 
-export default function FreeSoloCreateOption() {
+export default function SearchBar() {
     const [value, setValue] = React.useState(null);
 
     return (

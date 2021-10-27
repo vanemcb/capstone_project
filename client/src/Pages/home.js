@@ -4,7 +4,7 @@ import FooterBar from "../Components/footer";
 import ListLevels from "../Components/ListLevels";
 import { Row, Col } from "react-bootstrap";
 import HomeSideBar from "../Components/home_sidebar";
-import BarByCompany from "../Components/BarByCompany";
+import ListCompanies from "../Components/ListCompanies";
 import FreeSoloCreateOption from "../Components/searchbar";
 
 const Home = () => {
@@ -13,12 +13,18 @@ const Home = () => {
         <Fragment>
             <Navigation />
             <Row className="show-grid" style={{ margin: '20px 10px 10px 10px' }}>
-                <Col xs={2} md={2} style={{ display: 'flex'}}>
-                    <HomeSideBar/>
+                <Col xs={2} md={2} style={{ display: 'flex' }}>
+                    <HomeSideBar />
                 </Col>
                 <Col className="show-grid" xs={10} md={10}>
-                    <Row>
-                        <FreeSoloCreateOption />
+                    <Row style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        maxHeight: '400px',
+                        margin: '-20px 10px 30px 10px',
+                        alignContent: 'space-between'
+                    }}>
+                        <ListCompanies />
                     </Row>
                     <Row className="show-grid">
                         <Col xs={3} md={3}>
@@ -38,7 +44,7 @@ const Home = () => {
                     </Row>
                 </Col>
             </Row>
-            <FooterBar />
+            <FooterBar style={{ display: 'flex' }} sticky="bottom" />
         </Fragment>
     );
 };
