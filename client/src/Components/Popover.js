@@ -6,8 +6,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Link from '@mui/material/Link';
+//import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -75,7 +76,12 @@ export default function PopOver({ company, open, handleClose, title}) {
           >
             {title.length !== 0 && title.positions_list ?
               title['positions_list'].map(value => (
-                <Link href="/by_company/charts" underline="hover">
+                <Link
+                  to={{
+                    pathname: `/by_company/charts/${company}/${value}`,
+                    data: [company, value]
+                  }}
+                  underline="hover" >
                   {value}
                 </Link>
               )) : null}

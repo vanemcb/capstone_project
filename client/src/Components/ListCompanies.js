@@ -70,14 +70,11 @@ const ListCompanies= () => {
     } catch (err) {
       console.error(err.message);
     }
-  };
-
-  
+  };  
 
   if (loading) return "Loading...";
   if (error) return "Error!";
-
-  
+    
   return (
     <Fragment>
       <Box style={{ width: 700, margin: "auto" }} className="mt-5">

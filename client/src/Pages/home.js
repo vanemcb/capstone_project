@@ -4,7 +4,6 @@ import FooterBar from "../Components/footer";
 import ListLevels from "../Components/ListLevels";
 import { Row, Col } from "react-bootstrap";
 import HomeSideBar from "../Components/home_sidebar";
-import BarByCompany from "../Components/BarByCompany";
 import FreeSoloCreateOption from "../Components/searchbar";
 
 const Home = () => {

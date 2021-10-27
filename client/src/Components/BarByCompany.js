@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from 'react-chartjs-2';
+import { useLocation } from 'react-router-dom';
 
 const BarByCompany = () => {
+  const { data } = useLocation();
   
   const [dict, setDict] = useState([]);
   const getDict = async () => {
     try {
-      const response = await fetch("http://localhost:5000/by_company/Mercado Libre/Software Engineer");
+      const response = await fetch(`http://localhost:5000/by_company/${data[0]}/${data[1]}`);
       const jsonData = await response.json();
       setDict(jsonData);
     } catch (err) {
