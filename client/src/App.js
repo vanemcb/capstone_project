@@ -23,11 +23,11 @@ function App() {
                 <AddSalary />
             </Route>
 
-            <Route path="/by_company/" exact>
+        <Route path="/by_company">
                 <ByCompanyCharts />
             </Route>
 
-            <Route path="/by_position/" exact>
+        <Route path="/by_position/" exact>
                 <ByPositionCharts />
             </Route>
 

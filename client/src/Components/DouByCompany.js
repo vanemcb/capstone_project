@@ -3,12 +3,13 @@ import { Doughnut } from 'react-chartjs-2';
 import { useLocation } from 'react-router-dom';
 
 const DouByCompany = () => {
-  const { data } = useLocation();
-
+  //const { data } = useLocation();
+  const company = "PANDEV";
+  const position = "Full Stack"
   const [dict, setDict] = useState([]);
   const getDict = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/by_company/${data[0]}/${data[1]}`);
+      const response = await fetch(`http://localhost:5000/by_company/${company}/${position}`);
       const jsonData = await response.json();
       setDict(jsonData);
     } catch (err) {

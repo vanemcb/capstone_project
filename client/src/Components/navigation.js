@@ -1,11 +1,13 @@
 import React from 'react';
 import { Nav, Container, Navbar, Image } from 'react-bootstrap'
 import account from './images/account.png'
+import { Link } from 'react-router-dom';
 
 
 {/* colors  grisesito: #DEE0E6 azulito: #A7C3D1 azulote: #81A9BD */ }
 
 const Navigation = () => {
+
     return (
         <div width='100%'>
             <Navbar expand="lg" sticky="top" style={{ background: '#A7C3D1', height: '70px' }}>
