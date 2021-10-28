@@ -77,7 +77,7 @@ const ListCompanies = () => {
 
     return (
         <Fragment>
-            <Box style={{ width: 700, margin: "auto" }} className="mt-5">
+            <Box style={{ width: 650, margin: "auto" }} className="mt-5">
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }}>
                     {data.map(value => (
                         <Grid item xs={2} sm={4} md={4} key={value}>

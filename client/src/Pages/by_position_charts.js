@@ -4,18 +4,19 @@ import FooterBar from "../Components/footer";
 
 const ByPositionCharts = () => {
 
-  return (
-    <Fragment>
-      <Navigation />
-      <div class="row">
-        <div className="container">
-         
-        </div>
-      </div>
-      <FooterBar />
-    </Fragment>
+    return (
+        <div style={{ height: '100vh' }}>
+            <Fragment>
+                <Navigation />
+                <div class="row">
+                    <div className="container">
 
-  );
+                    </div>
+                </div>
+                <FooterBar className='sticky-bottom' />
+            </Fragment>
+        </div >
+    );
 };
 
 export default ByPositionCharts;

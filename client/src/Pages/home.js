@@ -10,7 +10,8 @@ import FreeSoloCreateOption from "../Components/searchbar";
 const Home = () => {
 
     return (
-        <Fragment>
+        <div style={{ height: '100vh' }}>
+        <Fragment >
             <Navigation />
             <Row className="show-grid" style={{ margin: '20px 10px 10px 10px' }}>
                 <Col xs={2} md={2} style={{ display: 'flex' }}>
@@ -20,7 +21,6 @@ const Home = () => {
                     <Row style={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        maxHeight: '400px',
                         margin: '-20px 10px 30px 10px',
                         alignContent: 'space-between'
                     }}>
@@ -44,8 +44,9 @@ const Home = () => {
                     </Row>
                 </Col>
             </Row>
-            <FooterBar style={{ display: 'flex' }} sticky="bottom" />
+            <FooterBar className='sticky-bottom'/>
         </Fragment>
+        </div>
     );
 };
 

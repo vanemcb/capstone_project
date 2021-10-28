@@ -9,8 +9,8 @@ import linkedin from './images/linkedin.png'
 
 const FooterBar = () => {
     return (
-        <div>
-            <Navbar expand="lg" sticky="bottom" style={{ background: '#E4D8DC'}}>
+        <div className="sticky-bottom">
+            <Navbar style={{ background: '#E4D8DC' }}>
                 <Container fluid>
                     <Fragment>
                         <div class="col-auto - variable width content">
@@ -27,7 +27,7 @@ const FooterBar = () => {
                         <Col className="show-grid">
                             <Nav
                                 className="me-auto my-2 my-lg-0"
-                                style={{ maxHeight: '65px' }}
+                                style={{ maxHeight: '80px' }}
                             >
                                 {/*Julian Info*/}
                                 <Col xs={4} md={4}>
