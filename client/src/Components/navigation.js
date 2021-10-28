@@ -5,7 +5,7 @@ import account from './images/account.png'
 
 const Navigation = () => {
     return (
-        <div>
+        <div width='100%'>
             <Navbar expand="lg" sticky="top" style={{ background: '#C9CCD5', height: '65px' }}>
                 <Container fluid>
                     <Navbar.Brand href="/">SALARY REFERENCE</Navbar.Brand>

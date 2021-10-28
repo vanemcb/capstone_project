@@ -1,12 +1,16 @@
 import React from "react";
-import Survey from '../Components/survey'
+import Navigation from "../Components/navigation";
+import Survey from '../Components/survey';
+import FooterBar from "../Components/footer";
 
 const AddSalary = () => {
-  return (
-    <div>
-      <Survey />
-    </div>
-  );
+    return (
+        <div>
+            <Navigation />
+            <Survey />
+            <FooterBar />
+        </div>
+    );
 };
 
 export default AddSalary;

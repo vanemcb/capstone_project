@@ -8,17 +8,18 @@ import ListCompanies from "../Components/ListCompanies";
 const ByCompany = () => {
 
     return (
-        <Fragment>
-            <Navigation />
-            <div class="row">
-                <div className="container">
-                    <ListCompanies />
+        <div style={{ height: '100vh', position: 'relative' }}>
+            <Fragment>
+                <Navigation />
+                <div class="row">
+                    <div className="container">
+                        <ListCompanies />
 
+                    </div>
                 </div>
-            </div>
-            <FooterBar />
-        </Fragment>
-
+            </Fragment> 
+            <FooterBar style={{ height: '100vh', position: 'relative' }} />
+        </div>
     );
 };
 

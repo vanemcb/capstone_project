@@ -20,7 +20,7 @@ function App() {
         <Home />
       </Route>
 
-      <Route path="/survey" exact>
+      <Route path="/add_salary" exact>
         <AddSalary />
       </Route>
 
