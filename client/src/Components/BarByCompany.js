@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 const BarByCompany = () => {
   const { data } = useLocation();
-  
+  console.log(data[2]);  
   const [dict, setDict] = useState([]);
   const getDict = async () => {
     try {

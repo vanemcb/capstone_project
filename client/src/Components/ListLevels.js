@@ -1,6 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-const ListLevels = () => {
+const ListLevels = ({nameCompany}) => {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -29,7 +36,7 @@ const ListLevels = () => {
     if (error) return "Error!";
 
     const companies = Object.keys(data);
-    const company = "PANDEV"
+    const company = nameCompany;
     const index = companies.indexOf(company);
     console.log(index);
     const ran = Math.floor(Math.random() * 1000);
@@ -48,20 +55,25 @@ const ListLevels = () => {
     }
 
     return (
-        <Fragment>
-            <div class="btn-group-vertical btn-group-lg" role="group">
-                {Object.keys(list_levels[index]).map(key => (
-
-                    <button type="button" class="btn btn-info" key={ran}
-                        style={{
-                            background: '#E4D8DC',
-                            width: 'flex'
-                        }}>
-                        {list_levels[index][key]}
-                    </button>
-                ))}
-            </div>
-        </Fragment>
+      <List
+        sx={{
+          width: '100%',
+          maxWidth: 360
+        }}
+      >
+        <ListItem sx={{ bgcolor: "#E4D8DC" }}>
+          <ListItemText primary={company} className="text-center" />
+        </ListItem>
+        <Divider />
+        {Object.keys(list_levels[index]).map(key => (
+          <ListItem button>
+            <ListItemAvatar className="ml-5">
+                <AttachMoneyIcon />
+            </ListItemAvatar>
+            <ListItemText primary={list_levels[index][key]} />
+          </ListItem>
+        ))}
+      </List>
     );
 };
 

@@ -79,7 +79,7 @@ export default function PopOver({ company, open, handleClose, title}) {
                 <Link
                   to={{
                     pathname: `/by_company/charts/${company}/${value}`,
-                    data: [company, value]
+                    data: [company, value, title.benefits]
                   }}
                   underline="hover" >
                   {value}
@@ -87,8 +87,30 @@ export default function PopOver({ company, open, handleClose, title}) {
               )) : null}
           </Box>
         </DialogContent>
-        <DialogContent>
-
+        <BootstrapDialogTitle className="text-center" onClose={handleClose}>
+          Reported non-salary benefits
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              typography: 'body1',
+              '& > :not(style) + :not(style)': {
+                ml: 2,
+              },
+            }}
+          >
+            {title.length !== 0 && title.positions_list ?
+              title['benefits'].map(value => (
+                <p>
+                  - {value}
+                </p>
+              )) : <Link underline="hover" >
+                No data
+              </Link>}
+          </Box>  
         </DialogContent>
       </BootstrapDialog>
     </div>

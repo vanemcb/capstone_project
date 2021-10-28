@@ -5,6 +5,7 @@ import ListLevels from "../Components/ListLevels";
 import { Row, Col } from "react-bootstrap";
 import HomeSideBar from "../Components/home_sidebar";
 import ListCompanies from "../Components/ListCompanies";
+import Levels from "../Components/levels";
 import FreeSoloCreateOption from "../Components/searchbar";
 
 const Home = () => {
@@ -28,18 +29,16 @@ const Home = () => {
                     </Row>
                     <Row className="show-grid">
                         <Col xs={3} md={3}>
-                            <p align="justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sit amet risus nullam eget felis eget nunc lobortis mattis.Sed elementum tempus egestas sed sed.Ornare aenean euismod elementum nisi quis eleifend.Egestas erat imperdiet sed euismod nisi.Id venenatis a condimentum vitae.Magnis dis parturient montes nascetur ridiculus mus.Ultrices eros in cursus turpis massa tincidunt dui.Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.Arcu felis bibendum ut tristique.Lectus urna duis convallis convallis tellus id.Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue.Pharetra vel turpis nunc eget.
-                            </p>
+                            <Levels />
                         </Col>
                         <Col xs={3} md={3}>
-                            <ListLevels />
+                            <ListLevels nameCompany="PANDEV"/>
                         </Col>
                         <Col xs={3} md={3}>
-                            <ListLevels />
+                            <ListLevels nameCompany="Mercado Libre"/>
                         </Col>
                         <Col xs={3} md={3}>
-                            <ListLevels />
+                            <ListLevels nameCompany="Actualiza"/>
                         </Col>
                     </Row>
                 </Col>
