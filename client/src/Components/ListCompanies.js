@@ -23,49 +23,42 @@ const ListCompanies = () => {
     const setValue = (event) => setCompany(event.target.id)
 
     const handleClickOpen = async (e) => {
-        const title2 = await getTitles(e.target.id);
-        setValue(e);
-        setTitle(title2);
-        console.log(e.target.id);
-        setOpen(true);
-        console.log(title2);
+      setValue(e);
+      getTitles(e.target.id);
+      setOpen(true);
     };
 
-    //console.log(title);
     const handleClose = () => {
         setOpen(false);
     };
 
-
-
     useEffect(() => {
-        fetch("http://localhost:5000/by_company")
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw response;
-            })
-            .then(data => {
-                setData(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching data: ", error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+      fetch("http://localhost:5000/by_company")
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw response;
+        })
+        .then(data => {
+          setData(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data: ", error);
+          setError(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }, []);
+
 
 
     const getTitles = async (comp) => {
         try {
-            //console.log(comp);
             const response = await fetch("http://localhost:5000/by_company/" + comp);
             const jsonData = await response.json();
-            //setTitle(jsonData);
-            //console.log(jsonData);
+            setTitle(jsonData);
             return jsonData;
         } catch (err) {
             console.error(err.message);

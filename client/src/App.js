@@ -9,6 +9,7 @@ import ByCompanyCharts from './Pages/by_company_charts';
 import ByPositionCharts from './Pages/by_position_charts';
 import PopOver from './Components/Popover';
 import Navigation from './Components/navigation';
+import ToggleCompanies from './Components/ToggleCompanies';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
                 <AddSalary />
             </Route>
 
-        <Route path="/by_company">
+        <Route path="/by_company" component={ToggleCompanies}>
                 <ByCompanyCharts />
             </Route>
 

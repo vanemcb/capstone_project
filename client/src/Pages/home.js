@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 
 
 import FreeSoloCreateOption from "../Components/searchbar";
+import ToggleCompanies from "../Components/ToggleCompanies"
 
 
 
@@ -30,7 +31,7 @@ const Home = () => {
                             margin: '-20px 10px 30px 10px',
                             alignContent: 'space-between'
                         }}>
-                            <ListCompanies />
+                          <ToggleCompanies />
                         </Row>
                         <Row className="show-grid" xs={10} md={10} >
                             <Col xs={1} md={1} style={{

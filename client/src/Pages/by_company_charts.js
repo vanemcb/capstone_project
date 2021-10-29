@@ -6,7 +6,8 @@ import BarByCompany from "../Components/BarByCompany"
 import DouByCompany from "../Components/DouByCompany"
 import HomeSideBar from "../Components/home_sidebar"
 import CardCompany from "../Components/CardCompany";
-import ListCompanies from "../Components/ListCompanies";
+import ToggleCompanies from "../Components/ToggleCompanies"
+
 
 {/* GENERAL INFORMATION */ }
 const ByCompanyCharts = () => {
