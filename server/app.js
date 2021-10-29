@@ -57,12 +57,12 @@ app.get("/file/:id", async (req, res) => {
 app.post("/add_salary", async (req, res) => {
 	const { gender, english_level, coding_learn, education_level,
 		salary, bonus, currency, title, level, total_xp, at_company_xp,
-		company, company_location, company_bussines, compensation } = req.body;
+		company, company_location, company_bussines, compensation, email } = req.body;
 	try {
 		const surveys = await survey.create({
 			gender, english_level, coding_learn, education_level,
 			salary, bonus, currency, title, level, total_xp, at_company_xp,
-			company, company_location, company_bussines, compensation
+			company, company_location, company_bussines, compensation, email
 		});
 		return res.json(surveys.id);
 	} catch (err) {
@@ -77,7 +77,6 @@ app.get("/survey", async (req, res) => {
 	try {
 		const allsurvey = await survey.findAll()
 		const rate = functions.get_rate()
-		console.log(rate)
 		return res.json(allsurvey);
 	} catch (err) {
 		console.log(err);
@@ -164,14 +163,12 @@ app.delete("/survey/:id", async (req, res) => {
 });
 
 
-//HOME --> Gets 3 random companies and display its median salaries by position
+//HOME --> Gets all companies and displays its median salaries by position
 app.get("/", async (req, res) => {
 	try {
-		const allsurvey = await survey.findAll()
-		const companies_list = [...new Set(all_survey.map(item => item.company))];
-		const random_company = functions.random_array(companies_list)
-		const salary_company = functions.company_salary(allsurvey)
-		return res.json({ "companies list": companies_list });
+		const all_survey = await survey.findAll()
+		const salary_company = functions.company_salary(all_survey)
+		return res.json(salary_company);
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Something went wrong' });
@@ -264,8 +261,9 @@ app.get("/by_company/:company", async (req, res) => {
 	}
 });
 
-//For a given company, gets: all salaries per level for a given title, positions and its
-// median salaries, average salary and bonus and a list of all non salary benefits
+// For a given company, returns: all positions, also the salaries per level for a
+// given title, its median salaries, average salary and bonus and a list of all
+// non salary benefits
 app.get("/by_company/:company_name/:position", async (req, res) => {
 	const company_name = req.params.company_name;
 	const position = req.params.position
@@ -308,7 +306,8 @@ app.get("/by_company/:company_name/:position", async (req, res) => {
 	}
 });
 
-//gets salaries, salaries by company and latest entries for a given postion and gender
+//gets salaries, salaries by company and latest entries for a given postion
+// and gender
 app.get("/by_position/:position/:filter", async (req, res) => {
 	const position = req.params.position;
 	const filter = req.params.filter
@@ -339,7 +338,8 @@ app.get("/by_position/:position/:filter", async (req, res) => {
 	}
 });
 
-//returns general information of survey population like english level, gender, etc
+// returns general information of survey population, allowed filters are
+// those listed in the -available_filters- list.
 app.get("/:filter", async (req, res) => {
 	const filter = req.params.filter;
 	const available_filters =
