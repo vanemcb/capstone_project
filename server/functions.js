@@ -1,4 +1,4 @@
-const { sequelize, Survey, User } = require('./models')
+const { sequelize, survey, user, Files } = require('./models')
 const fs = require('fs')
 
 survey_functions = {}
@@ -7,8 +7,14 @@ function average(nums) {
 	return parseInt(nums.reduce((a, b) => (a + b)) / nums.length);
 }
 
+function median(arr) {
+	const mid = Math.floor(arr.length / 2),
+		nums = [...arr].sort((a, b) => a - b);
+	return parseInt(arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2);
+};
+
 // Albanil memorial block
-// Returns the average salaries of every level for an specific company
+// Returns the median salaries of every level for an specific company
 function level_salary(survey) {
 	const l0_salaries = [];
 	const l1_salaries = [];
@@ -32,38 +38,38 @@ function level_salary(survey) {
 			l5_salaries.push(us_salary)
 		}
 	}
-	let l0_average = 0;
-	let l1_average = 0;
-	let l2_average = 0;
-	let l3_average = 0;
-	let l4_average = 0;
-	let l5_average = 0;
+	let l0_median = 0;
+	let l1_median = 0;
+	let l2_median = 0;
+	let l3_median = 0;
+	let l4_median = 0;
+	let l5_median = 0;
 
 	if (l0_salaries.length > 0) {
-		l0_average = parseInt(average(l0_salaries));
+		l0_median = parseInt(median(l0_salaries));
 	} if (l1_salaries.length > 0) {
-		l1_average = parseInt(average(l1_salaries));
+		l1_median = parseInt(median(l1_salaries));
 	}
 	if (l2_salaries.length > 0) {
-		l2_average = parseInt(average(l2_salaries));
+		l2_median = parseInt(median(l2_salaries));
 	}
 	if (l3_salaries.length > 0) {
-		l3_average = parseInt(average(l3_salaries));
+		l3_median = parseInt(median(l3_salaries));
 	}
 	if (l4_salaries.length > 0) {
-		l4_average = parseInt(average(l4_salaries));
+		l4_median = parseInt(median(l4_salaries));
 	}
 	if (l5_salaries.length > 0) {
-		l5_average = parseInt(average(l5_salaries));
+		l5_median = parseInt(median(l5_salaries));
 	}
 	return ({
-		"L0": l0_average, "L1": l1_average, "L2": l2_average, "L3": l3_average,
-		"L4": l4_average, "L5": l5_average
+		"L0": l0_median, "L1": l1_median, "L2": l2_median, "L3": l3_median,
+		"L4": l4_median, "L5": l5_median
 	})
 
 }
 
-//Returns a dictionary containing the average salary per company per level
+//Returns a dictionary containing the median salary per company per level
 function company_salary(survey) {
 	const company_salaries = {}
 	dollar = get_rate()
@@ -76,13 +82,25 @@ function company_salary(survey) {
 	})
 	for (const co in company_salaries) {
 		for (const sal in company_salaries[co]) {
-			company_salaries[co][sal] = average(company_salaries[co][sal])
+			company_salaries[co][sal] = median(company_salaries[co][sal])
 		}
 	}
 	return company_salaries
 }
 
-//Returns a dictionary containing a list with the average salary per company per level
+function salaries_level(survey) {
+	const company_salaries = {}
+	dollar = get_rate()
+	survey.forEach(e => company_salaries[e["dataValues"]["level"]] = [])
+	survey.forEach(e => {
+		const usd_salary = to_dollars(e)
+		company_salaries[e["dataValues"]["level"]].push(usd_salary)
+	})
+	return company_salaries
+}
+
+
+//Returns a dictionary containing a list with the median salary per company per level
 // for a given position
 function postion_salary(survey) {
 	const company_salaries = {}
@@ -93,11 +111,10 @@ function postion_salary(survey) {
 		company_salaries[co_name].push(us_salary)
 	})
 	for (const co in company_salaries) {
-		company_salaries[co] = average(company_salaries[co])
+		company_salaries[co] = median(company_salaries[co])
 	}
 	return company_salaries
 }
-
 
 //SHOULD NOT ALLOW FOR SALARY FILTER
 //EXPERIENCE SHOULD GO ON RANGES
@@ -114,7 +131,7 @@ function postion_salary_filter(survey, filter) {
 	})
 	for (const co in filter_salaries) {
 		for (const sal in filter_salaries[co]) {
-			filter_salaries[co][sal] = average(filter_salaries[co][sal])
+			filter_salaries[co][sal] = median(filter_salaries[co][sal])
 		}
 	}
 	return filter_salaries
@@ -126,6 +143,9 @@ function postion_salary_filter(survey, filter) {
 function general_filters(survey, filter) {
 	const general_filter = {}
 	survey.forEach(e => {
+		if (!Object.keys(general_filter)[0]) {
+			return ({ filter: "No data available" })
+		}
 		if (typeof general_filter[e["dataValues"][filter]] === 'undefined') {
 			general_filter[e["dataValues"][filter]] = 0
 		}
@@ -137,12 +157,12 @@ function general_filters(survey, filter) {
 //Returns a list of the last 15 entries for a given position in all companies
 // with the parameters given in the entries_field variable
 async function last_entries(position) {
-	const survey = await Survey.findAll({
+	const surveys = await survey.findAll({
 		where: { title: position }, order: [['createdAt', 'DESC']], limit: 15
 	});
 	const entries_list = []
 	const entries_fields = ["company", "createdAt", "level", "total_xp", "at_company_xp", "salary", "bonus"]
-	for (registry of survey) {
+	for (registry of surveys) {
 		const recent_entries = {}
 		for (fields in registry["dataValues"]) {
 			if (entries_fields.includes(fields)) {
@@ -203,6 +223,18 @@ function bonus_to_dollars(e) {
 	}
 }
 
+//Opens the local file where the current day usd_cop exchange rate is stored
+// and returns it
+'use strict';
+function load_file(path) {
+	let rawdata = fs.readFileSync(path);
+	return (rawdata)
+}
+
+function random_array(array) {
+	return array[Math.floor(Math.random() * array.length)]
+
+}
 
 survey_functions.average = average
 survey_functions.level_salary = level_salary
@@ -215,5 +247,10 @@ survey_functions.general_filters = general_filters
 survey_functions.get_rate = get_rate
 survey_functions.to_dollars = to_dollars
 survey_functions.bonus_to_dollars = bonus_to_dollars
+survey_functions.load_file = load_file
+survey_functions.median = median
+survey_functions.random_array = random_array
+survey_functions.salaries_level = salaries_level
+
 
 module.exports = survey_functions;
