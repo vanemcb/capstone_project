@@ -6,6 +6,8 @@ import BarByCompany from "../Components/BarByCompany"
 import DouByCompany from "../Components/DouByCompany"
 import HomeSideBar from "../Components/home_sidebar"
 import CardCompany from "../Components/CardCompany";
+import ToggleCompanies from "../Components/ToggleCompanies"
+
 
 const ByCompanyCharts = () => {
   return (
@@ -22,7 +24,7 @@ const ByCompanyCharts = () => {
         </Col>
         <Col className="show-grid" xs={5} md={5}>
           <Row style={{ margin: '0px 20px 10px 0px', display: 'flex' }}>
-            <BarByCompany />
+            <ToggleCompanies />
           </Row>
         </Col>
         <Col className="show-grid" xs={5} md={5}>

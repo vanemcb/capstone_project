@@ -7,6 +7,7 @@ import HomeSideBar from "../Components/home_sidebar";
 import ListCompanies from "../Components/ListCompanies";
 import Levels from "../Components/levels";
 import FreeSoloCreateOption from "../Components/searchbar";
+import ToggleCompanies from "../Components/ToggleCompanies"
 
 const Home = () => {
 
@@ -25,7 +26,7 @@ const Home = () => {
                             margin: '-20px 10px 30px 10px',
                             alignContent: 'space-between'
                         }}>
-                            <ListCompanies />
+                          <ToggleCompanies />
                         </Row>
                         <Row className="show-grid">
                             <Col xs={3} md={3}>
