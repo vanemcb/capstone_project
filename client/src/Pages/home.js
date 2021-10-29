@@ -6,7 +6,12 @@ import { Row, Col } from "react-bootstrap";
 import HomeSideBar from "../Components/home_sidebar";
 import ListCompanies from "../Components/ListCompanies";
 import Levels from "../Components/levels";
+import Grid from '@mui/material/Grid';
+
+
 import FreeSoloCreateOption from "../Components/searchbar";
+
+
 
 const Home = () => {
 
@@ -18,7 +23,7 @@ const Home = () => {
                     <Col xs={2} md={2} style={{ display: 'flex' }}>
                         <HomeSideBar />
                     </Col>
-                    <Col className="show-grid" xs={10} md={10}>
+                    <Col className="show-grid" xs={10} md={10} style={{ display: 'block' }}>
                         <Row style={{
                             display: 'flex',
                             flexWrap: 'wrap',
@@ -27,24 +32,45 @@ const Home = () => {
                         }}>
                             <ListCompanies />
                         </Row>
-                        <Row className="show-grid">
-                            <Col xs={3} md={3}>
+                        <Row className="show-grid" xs={10} md={10} >
+                            <Col xs={1} md={1} style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                margin: '00px 00px 00px 00px',
+                                alignContent: 'space-between'
+                            }}>
                                 <Levels />
-                            </Col>
-                            <Col xs={3} md={3}>
-                                <ListLevels nameCompany="PANDEV" />
-                            </Col>
-                            <Col xs={3} md={3}>
-                                <ListLevels nameCompany="Mercado Libre" />
-                            </Col>
-                            <Col xs={3} md={3}>
-                                <ListLevels nameCompany="Actualiza" />
-                            </Col>
+                            </Col >
+                            <Col xs={11} md={11}>
+                                <Row className="ahow-grid" style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    margin: '00px 00px 00px 00px',
+                                    alignContent: 'space-between'
+                                }}>
+                                    <Col  >
+                                        <Levels />
+                                    </Col>
+                                    <Col >
+                                        <Levels />
+                                    </Col>
+                                    <Col>
+                                        <Levels />
+                                    </Col>
+                                    <Col >
+                                        <Levels />
+                                    </Col>
+                                    <Col >
+                                        <Levels />
+                                    </Col>
+
+                                </Row>
+                            </Col >
                         </Row>
                     </Col>
                 </Row>
-                <FooterBar />
             </Fragment>
+            <FooterBar className="sticky-bottom" />
         </div>
     );
 };
