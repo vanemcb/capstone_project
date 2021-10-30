@@ -13,23 +13,24 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ToggleCompanies = () => {
+const ToggleCompanies = ({ setDicCompany, setCompany }) => {
 
   const [companies, setCompanies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState([]);
-  const [buttom, setButtom] = useState([]);
+  const [info, setInfo] = useState(null);
+  const [button, setButton] = useState("")
+
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClickButton = async (e) => {
-    setButtom(e.target.id)
-    await getInfo(e.target.id)
-    console.log(info);
+    setCompany(e.target.id)
+    const getValue = await getInfo(e.target.id)
+    setDicCompany(getValue)
   };
 
   const handleClose = () => {
@@ -56,11 +57,12 @@ const ToggleCompanies = () => {
       });
   }, []);
 
-  const getInfo = async (company) => {
+  const getInfo = async (comp) => {
     try {
-      const response = await fetch("http://localhost:5000/by_company/" + company);
+      const response = await fetch("http://localhost:5000/by_company/" + comp);
       const jsonData = await response.json();
-      setInfo(jsonData);
+      //setInfo(jsonData);
+      //setDicCompany(jsonData)
       return jsonData;
     } catch (err) {
       console.error(err.message);
@@ -81,12 +83,7 @@ const ToggleCompanies = () => {
                 id={value}
                 onClick={handleClickButton}
               >
-                <Link to={{
-                  pathname: "by_company",
-                  data: [info, value]
-                }}>
-                  {value}
-                </Link>
+                {value}
               </Item>
             </Grid>
           ))}

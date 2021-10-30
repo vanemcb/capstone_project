@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
@@ -7,10 +7,14 @@ import DouByCompany from "../Components/DouByCompany"
 import HomeSideBar from "../Components/home_sidebar"
 import CardCompany from "../Components/CardCompany";
 import ToggleCompanies from "../Components/ToggleCompanies"
+import { useLocation } from 'react-router-dom';
 
 
 {/* GENERAL INFORMATION */ }
 const ByCompanyCharts = () => {
+    const[dicCompany, setDicCompany] = useState(null)
+    const [company, setCompany] = useState("")
+
     return (
         <Fragment>
             <Navigation />
@@ -20,7 +24,7 @@ const ByCompanyCharts = () => {
                         <HomeSideBar />
                     </Row >
                     <Row >
-                        <CardCompany />
+              <CardCompany dicCompany={dicCompany} company={company} />
                     </Row>
                 </Col>
                 <Col className="show-grid" xs={10} md={10}>
@@ -30,7 +34,7 @@ const ByCompanyCharts = () => {
                         margin: '0px 0px 20px 0px',
                         alignContent: 'space-between'
                     }}>
-                        <ListCompanies />
+              <ToggleCompanies setDicCompany={setDicCompany} setCompany={setCompany}/>
                     </Row>
                     <Row style={{
                         display: 'flex',
