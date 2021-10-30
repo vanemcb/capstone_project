@@ -11,13 +11,15 @@ import Grid from '@mui/material/Grid';
 
 import FreeSoloCreateOption from "../Components/searchbar";
 import ToggleCompanies from "../Components/ToggleCompanies"
+import { height } from "@mui/system";
 
 
 
 const Home = () => {
 
     return (
-        <div style={{ height: '100vh' }}>
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
+            <div>
             <Fragment >
                 <Navigation />
                 <Row className="show-grid" style={{ margin: '20px 10px 10px 10px' }}>
@@ -31,7 +33,7 @@ const Home = () => {
                             margin: '-20px 10px 30px 10px',
                             alignContent: 'space-between'
                         }}>
-                          <ToggleCompanies />
+                            <ToggleCompanies />
                         </Row>
                         <Row className="show-grid" xs={10} md={10} >
                             <Col xs={1} md={1} style={{
@@ -71,7 +73,10 @@ const Home = () => {
                     </Col>
                 </Row>
             </Fragment>
-            <FooterBar className="sticky-bottom" />
+            </div>
+            <div>
+            <FooterBar />
+            </div>
         </div>
     );
 };
