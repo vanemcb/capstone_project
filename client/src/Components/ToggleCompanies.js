@@ -57,6 +57,8 @@ const ToggleCompanies = ({ setDicCompany, setCompany }) => {
       });
   }, []);
 
+  console.log(companies)
+
   const getInfo = async (comp) => {
     try {
       const response = await fetch("http://localhost:5000/by_company/" + comp);
@@ -76,7 +78,8 @@ const ToggleCompanies = ({ setDicCompany, setCompany }) => {
     <Fragment>
       <Box style={{ width: 650, margin: "auto" }} className="mt-5">
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }}>
-          {companies.slice(0, 5).map(value => (
+          {companies && companies.companies_list ?
+            companies.companies_list.slice(0, 5).map(value => (
             <Grid item xs={2} sm={4} md={4} key={value}>
               <Item
                 type="button"
@@ -86,7 +89,7 @@ const ToggleCompanies = ({ setDicCompany, setCompany }) => {
                 {value}
               </Item>
             </Grid>
-          ))}
+          )): null}
           <Grid item xs={2} sm={4} md={4} key="more">
             <Item
               type="button"
@@ -99,7 +102,7 @@ const ToggleCompanies = ({ setDicCompany, setCompany }) => {
       </Box>
 
 
-      <PopoverCompanies open={open} handleClose={handleClose} companies={companies} />
+      {/* <PopoverCompanies open={open} handleClose={handleClose} companies={companies} /> */}
 
     </Fragment>
   );

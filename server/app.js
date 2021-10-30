@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors");
 const functions = require('./functions.js')
 const { sequelize, survey, user, Files } = require('./models')
 const cron = require('node-cron');
@@ -7,6 +8,7 @@ const fs = require('fs');
 const { bonus_to_dollars } = require('./functions.js');
 
 const app = express()
+app.use(cors());
 app.use(express.json())
 
 //CRON.SCHEDULE, checks everyday at hour: 1, whats the current 
@@ -206,7 +208,7 @@ app.get("/by_company", async (req, res) => {
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies list": companies_list
+				"companies_list": companies_list
 			});
 		} catch (err) {
 			console.log(err);
@@ -349,7 +351,8 @@ app.get("/:filter", async (req, res) => {
 			"education_level",
 			"total_xp",
 			"company_location",
-			"coding_learn"
+			"coding_learn",
+      "by_company"
 		]
 	if (available_filters.includes(filter)) {
 		try {
