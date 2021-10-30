@@ -9,8 +9,8 @@ import linkedin from './images/linkedin.png'
 
 const FooterBar = () => {
     return (
-        <div>
-            <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', position: 'absolute', width: '100%', bottom: '0%' }}>
+        <div >
+            <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', position: 'absolute', width: '100%', bottom: '0%'}}>
                 <Fragment>
                     <div class="col-auto - variable width content">
                         <Navbar.Brand href="#LinkToBrandingPage">GET TO KNOW US BETTER!!</Navbar.Brand>

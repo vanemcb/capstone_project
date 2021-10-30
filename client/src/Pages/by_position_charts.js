@@ -11,7 +11,7 @@ import ListCompanies from "../Components/ListCompanies";
 {/* GRAPHICS */ }
 const ByPositionCharts = () => {
     return (
-        <div className="position" style={{ position: 'relative', minHeight: '100vh' }}>
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
             <Fragment>
                 <Navigation />
                 <Row className="show-grid" style={{ margin: '20px 10px 10px 10px' }}>
@@ -48,16 +48,10 @@ const ByPositionCharts = () => {
                         }}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras varius sem dictum nulla blandit molestie. Phasellus finibus dui fringilla, aliquet tortor lacinia, blandit purus. Phasellus risus enim, luctus in aliquet ornare, vulputate non purus. Phasellus eu metus et augue porta mollis vel non lectus. Cras sed tellus felis. Nullam in ante non elit ultricies consectetur vel sed magna. Phasellus condimentum facilisis lectus, vel congue est aliquet ut. Donec vitae sapien massa. Nam sem est, mollis id semper ut, aliquam a metus. Aliquam porttitor bibendum arcu, at suscipit magna ultricies eget. Nulla eu purus id eros auctor eleifend id sit amet metus. Nunc molestie viverra nulla eget pretium. Donec quis tellus a eros rutrum gravida. Nunc congue ante ac odio sodales bibendum. Morbi et tellus nibh. Pellentesque quis semper elit, sit amet vestibulum nunc.
                         </Row>
-
                     </Col>
-
-
                 </Row>
             </Fragment>
-
-
-
-            <FooterBar />
+                    <FooterBar />
 
         </div >
     );

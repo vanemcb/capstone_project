@@ -19,7 +19,6 @@ const Home = () => {
 
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
-            <div>
             <Fragment >
                 <Navigation />
                 <Row className="show-grid" style={{ margin: '20px 10px 10px 10px' }}>
@@ -72,11 +71,11 @@ const Home = () => {
                         </Row>
                     </Col>
                 </Row>
+                <Row>
+
+                    <FooterBar />
+                </Row>
             </Fragment>
-            </div>
-            <div>
-            <FooterBar />
-            </div>
         </div>
     );
 };
