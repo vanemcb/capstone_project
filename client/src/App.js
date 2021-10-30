@@ -24,7 +24,7 @@ function App() {
                 <AddSalary />
             </Route>
 
-        <Route path="/by_company" component={ToggleCompanies}>
+        <Route path="/by_company" exact>
                 <ByCompanyCharts />
             </Route>
 

@@ -13,23 +13,24 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ToggleCompanies = () => {
+const ToggleCompanies = ({ setDicCompany, setCompany }) => {
 
   const [companies, setCompanies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState([]);
-  const [buttom, setButtom] = useState([]);
+  const [info, setInfo] = useState(null);
+  const [button, setButton] = useState("")
+
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClickButton = async (e) => {
-    setButtom(e.target.id)
-    await getInfo(e.target.id)
-    console.log(info);
+    setCompany(e.target.id)
+    const getValue = await getInfo(e.target.id)
+    setDicCompany(getValue)
   };
 
   const handleClose = () => {
@@ -56,11 +57,14 @@ const ToggleCompanies = () => {
       });
   }, []);
 
-  const getInfo = async (company) => {
+  console.log(companies)
+
+  const getInfo = async (comp) => {
     try {
-      const response = await fetch("http://localhost:5000/by_company/" + company);
+      const response = await fetch("http://localhost:5000/by_company/" + comp);
       const jsonData = await response.json();
-      setInfo(jsonData);
+      //setInfo(jsonData);
+      //setDicCompany(jsonData)
       return jsonData;
     } catch (err) {
       console.error(err.message);
@@ -74,22 +78,18 @@ const ToggleCompanies = () => {
     <Fragment>
       <Box style={{ width: 650, margin: "auto" }} className="mt-5">
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }}>
-          {companies.slice(0, 5).map(value => (
+          {companies && companies.companies_list ?
+            companies.companies_list.slice(0, 5).map(value => (
             <Grid item xs={2} sm={4} md={4} key={value}>
               <Item
                 type="button"
                 id={value}
                 onClick={handleClickButton}
               >
-                <Link to={{
-                  pathname: "by_company",
-                  data: [info, value]
-                }}>
-                  {value}
-                </Link>
+                {value}
               </Item>
             </Grid>
-          ))}
+          )): null}
           <Grid item xs={2} sm={4} md={4} key="more">
             <Item
               type="button"
@@ -102,7 +102,7 @@ const ToggleCompanies = () => {
       </Box>
 
 
-      <PopoverCompanies open={open} handleClose={handleClose} companies={companies} />
+      {/* <PopoverCompanies open={open} handleClose={handleClose} companies={companies} /> */}
 
     </Fragment>
   );
