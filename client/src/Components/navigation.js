@@ -20,8 +20,8 @@ const Navigation = () => {
                             className="me-auto my-2 my-lg-0"
                             style={{ maxHeight: '100px' }}
                         >
-                            <Nav.Link href="/by_company/">Graphics</Nav.Link>
-                            <Nav.Link href="/by_position/">General Info</Nav.Link>
+                            <Nav.Link href="/graphics/">Graphics</Nav.Link>
+                            <Nav.Link href="/general_info/">General Info</Nav.Link>
                             <Nav.Link href="#action1">Comunity</Nav.Link>
                             <Nav.Link href="#action2">Services</Nav.Link>
                         </Nav>

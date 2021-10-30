@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
@@ -7,9 +7,12 @@ import DouByCompany from "../Components/DouByCompany"
 import HomeSideBar from "../Components/home_sidebar"
 import CardCompany from "../Components/CardCompany"
 import ListCompanies from "../Components/ListCompanies";
+import ToggleCompanies from "../Components/ToggleCompanies";
 
-{/* GRAPHICS */ }
-const ByPositionCharts = () => {
+
+const GeneralInfo = () => {
+    const [dicCompany, setDicCompany] = useState(null)
+    const [company, setCompany] = useState("")
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
             <Fragment>
@@ -20,7 +23,7 @@ const ByPositionCharts = () => {
                             <HomeSideBar />
                         </Row >
                         <Row >
-                            <CardCompany />
+                            <CardCompany dicCompany={dicCompany} company={company} />
                         </Row>
                     </Col>
                     <Col className="show-grid" xs={10} md={10}>
@@ -30,7 +33,7 @@ const ByPositionCharts = () => {
                             margin: '0px 0px 20px 0px',
                             alignContent: 'space-between'
                         }}>
-                            <ListCompanies />
+                            <ToggleCompanies setDicCompany={setDicCompany} setCompany={setCompany} />
                         </Row>
                         <Row style={{
                             display: 'flex',
@@ -51,10 +54,10 @@ const ByPositionCharts = () => {
                     </Col>
                 </Row>
             </Fragment>
-                    <FooterBar />
+            <FooterBar />
 
         </div >
     );
 };
 
-export default ByPositionCharts;
+export default GeneralInfo;

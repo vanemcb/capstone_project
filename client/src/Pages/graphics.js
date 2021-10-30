@@ -11,8 +11,7 @@ import ToggleCompanies from "../Components/ToggleCompanies"
 import { useLocation } from 'react-router-dom';
 
 
-{/* GENERAL INFORMATION */ }
-const ByCompanyCharts = () => {
+const Graphics = () => {
     const [dicCompany, setDicCompany] = useState(null)
     const [company, setCompany] = useState("")
 
@@ -69,4 +68,4 @@ const ByCompanyCharts = () => {
         </Fragment>
     );
 };
-export default ByCompanyCharts;
+export default Graphics;

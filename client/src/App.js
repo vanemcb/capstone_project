@@ -5,11 +5,10 @@ import './App.css';
 //Pages
 import Home from './Pages/home';
 import AddSalary from './Pages/add_salary';
-import ByCompanyCharts from './Pages/by_company_charts';
-import ByPositionCharts from './Pages/by_position_charts';
+import Graphics from './Pages/graphics';
+import GeneralInfo from './Pages/general_info';
 import PopOver from './Components/Popover';
-import Navigation from './Components/navigation';
-import ToggleCompanies from './Components/ToggleCompanies';
+
 
 
 function App() {
@@ -24,12 +23,12 @@ function App() {
                 <AddSalary />
             </Route>
 
-        <Route path="/by_company" exact>
-                <ByCompanyCharts />
+        <Route path="/graphics" exact>
+                <Graphics />
             </Route>
 
-        <Route path="/by_position/" exact>
-                <ByPositionCharts />
+        <Route path="/general_info/" exact>
+                <GeneralInfo />
             </Route>
 
         </Router>
