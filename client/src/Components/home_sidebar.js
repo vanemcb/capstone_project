@@ -8,7 +8,7 @@ const HomeSideBar = () => {
         <div>
             <Container fluid>
                 <Button className='btn hover-shadow' href="/add_salary" style={{
-                    background: '#E4D8DC',
+                    background: '#DEE0E6',
                     fontSize: '18px',
                 }}>
                     <Image src={income}
