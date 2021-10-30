@@ -99,7 +99,7 @@ app.get("/survey/:id", async (req, res) => {
 });
 
 //links a survey to a user
-app.put("/registry/:id", async (req, res) => {
+app.put("/survey_registry/:id", async (req, res) => {
 	const survey_id = req.params.id;
 	const { user_id } = req.body;
 	try {
@@ -369,8 +369,86 @@ app.get("/:filter", async (req, res) => {
 	}
 });
 
+// Endpoints to deal with users registration, requests and responses ---------------
+
+//submits a user registration request
+app.post("/user_registry", async (req, res) => {
+	const { name, last_name, username, email, password } = req.body;
+	try {
+		const surveys = await users.create({
+			name: name,
+			last_name: last_name,
+			username: username,
+			email: email,
+			password: password
+		});
+		return res.json(surveys.id);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+});
+
+app.get("/users", async (req, res) => {
+	try {
+		const surveys = await users.findAll();
+		return res.json(surveys);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+});
+
+app.get("/user/:id", async (req, res) => {
+	const id = req.params.id;
+	try {
+		const user = await users.findAll({
+			where: { id: id }
+		});
+		return res.json(surveys);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+});
+
+
+app.put("/user/:id", async (req, res) => {
+	const id = req.params.id;
+	const { name, last_name, username, email, password } = req.body;
+	try {
+		const surveys = await survey.update({
+			name: name,
+			last_name: last_name,
+			username: username,
+			email: email,
+			password: password
+		}, {
+			where: { id: id }
+		});
+		return res.json(surveys);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+})
+
+app.delete("/user/:id", async (req, res) => {
+	const id = req.params.id;
+	try {
+		const surveys = await survey.destroy({
+			where: { id: id }
+		});
+		return res.json(surveys);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json(err);
+	}
+})
+
 app.listen({ port: 5000 }, async () => {
 	console.log("Server up on port 5000")
 	await sequelize.authenticate();
 	console.log("Database correctly CONNECTED")
 });
+
