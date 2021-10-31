@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from 'react-chartjs-2';
-import { useLocation } from 'react-router-dom';
 
-const BarByCompany = () => {
-  //const { data } = useLocation();
-  const company = "PANDEV";
-  const position = "Full Stack"
-  const [dict, setDict] = useState([]);
-  const getDict = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/by_company/${company}/${position}`);
-      const jsonData = await response.json();
-      setDict(jsonData);
-    } catch (err) {
-      console.error(err.message);
+const BarByCompany = ( { dicCompany } ) => {
+
+  
+  let level_list = [];
+  const company = ""
+  if (dicCompany) {    
+    const l = {"L0":0, "L1":0, "L2":0, "L3":0, "L4":0, "L5":0};
+    const company = dicCompany.company_name;
+    console.log(company)
+    for (const key in l) {
+      if (key in dicCompany.company_median_salary[dicCompany.company_name]) {
+        l[key] = dicCompany.company_median_salary[dicCompany.company_name][key];
+      }
+    }    
+    for (const key2 in l) {
+      level_list.push(l[key2]);
     }
-  };
-
-  const level_list = [];
-  for (const key in dict.salary_by_level) {
-    level_list.push(dict.salary_by_level[key]);
   }
-
-  useEffect(() => {
-    getDict();
-  }, []);
 
   return (
     <div>
@@ -33,23 +27,13 @@ const BarByCompany = () => {
           labels: ['L0', 'L1', 'L2', 'L3', 'L4', 'L5'],
           datasets: [
             {
-              label: 'SALARY VS LEVEL',
+              label: "hola",
               data: level_list,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)'
+                'rgba(75, 192, 192, 0.5)'
               ],
               borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(75, 192, 192, 1)'
               ],
               borderWidth: 0.5,
             },

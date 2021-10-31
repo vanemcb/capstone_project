@@ -1,34 +1,30 @@
 import React, { useEffect, useState, Fragment } from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import 'bootstrap/dist/css/bootstrap.css';
 
-export default function CardCompany( {dicCompany, company} ) {
+export default function CardCompany({ dicCompany, setPosition, position } ) {
+ 
+  const handleClickRadio = (e) => {
+    setPosition(e.target.value);
+  };
 
-  const position = "";
 
   return (
-    <Card sx={{ minWidth: 200, mt: 8}}>
-      <CardContent>
-        <Typography variant="h5" component="div" className="text-center" sx={{ mb: 0}}>
-          {company ? company : "Select company" }
-        </Typography>
-        <Typography variant="h6" className="text-center" color="text.secondary" sx={{ mb: 2 }}>
-          #{position ? position : "Select position"}#
-        </Typography>
-        <Typography sx={{ mb: 2 }} color="text.secondary" className="text-left">
-          COMPANY POSITION:
-        </Typography>
-        {dicCompany !== null ?
-          dicCompany.positions_list.map(value => (
-            <Typography variant="body2">
-              - {value}
-            </Typography>
-          )) : <p>
-            No data
-          </p>}
-        
-      </CardContent>
-    </Card>
+    <div className="card" style={{ width: 288}}>
+      <div className="card-body">
+        <h5 className="card-title text-center">{dicCompany !== null && dicCompany.company_name ? dicCompany.company_name : "Select company"}</h5>
+        <h6 className="card-subtitle mb-2 text-muted text-center">#{position ? position : "GENERAL INFORMATION"}#</h6>
+        <div className="card-text">
+          {dicCompany !== null ?
+            dicCompany.positions_list.map(value => (
+              <div className="form-check" key={value}>
+                <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value={value} onChange={handleClickRadio}/>
+                <label className="form-check-label" >
+                {value}
+              </label>
+            </div>
+            )) : "No data"}
+        </div>
+      </div>
+    </div>
   );
 }

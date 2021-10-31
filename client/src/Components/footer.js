@@ -12,7 +12,7 @@ const FooterBar = () => {
         <div >
             <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', position: 'absolute', width: '100%', bottom: '0%'}}>
                 <Fragment>
-                    <div class="col-auto - variable width content">
+                    <div className="col-auto - variable width content">
                         <Navbar.Brand href="#LinkToBrandingPage">GET TO KNOW US BETTER!!</Navbar.Brand>
                         <Nav
                             className="me-auto my-2 my-lg-0"
@@ -75,7 +75,7 @@ const FooterBar = () => {
                             </Col>
                         </Nav>
                     </Col>
-                    <div class="col-auto - variable width content">
+                      <div className="col-auto - variable width content">
                         <Nav
                             className="ml-auto my-2 my-lg-0"
                             style={{ maxHeight: '100px' }}

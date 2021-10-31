@@ -9,7 +9,7 @@ const DouByCompany = () => {
   const [dict, setDict] = useState([]);
   const getDict = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/by_company/${company}/${position}`);
+      const response = await fetch(`http://localhost:5000/by_company/PANDEV/Software Engineer`);
       const jsonData = await response.json();
       setDict(jsonData);
     } catch (err) {

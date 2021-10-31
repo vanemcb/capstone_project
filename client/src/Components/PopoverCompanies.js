@@ -59,36 +59,62 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PopoverCompanies({ open, handleClose, companies }) {
+export default function PopoverCompanies({ companies, handleClickButton }) {
 
   return (
-    <div style={{maxWidth: 2000}}>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-        
-        
-      >
-        <BootstrapDialogTitle className="text-center" onClose={handleClose}>
-          All Companies
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Box style={{ width: 650, margin: "auto" }} className="mt-5">
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }}>
-              {companies.map(value => (
-                <Grid item xs={2} sm={4} md={4} key={value}>
-                  <Item
-                    type="button"
-                    id={value}
-                  >{value}
-                  </Item>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </DialogContent>
-      </BootstrapDialog>
+    <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLongTitle">All companies</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            {companies && companies.companies_list ?
+              companies.companies_list.map(value => (
+                <button
+                  className="btn btn-secondary mr-2"
+                  type="button"
+                  onClick={handleClickButton}
+                  value={value}
+                  key={value}>
+                  {value}
+                </button>
+              )) : null
+            }
+          </div>
+        </div>
+      </div>
     </div>
+    // <div style={{maxWidth: 2000}}>
+    //   <BootstrapDialog
+    //     onClose={handleClose}
+    //     aria-labelledby="customized-dialog-title"
+    //     open={open}
+        
+        
+    //   >
+    //     <BootstrapDialogTitle className="text-center" onClose={handleClose}>
+    //       All Companies
+    //     </BootstrapDialogTitle>
+    //     <DialogContent dividers>
+    //       <Box style={{ width: 650, margin: "auto" }} className="mt-5">
+    //         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }}>
+    //           {companies.companies_list.map(value => (
+    //             <Grid item xs={2} sm={4} md={4} key={value}>
+    //               <Item
+    //                 type="button"
+    //                 id={value}
+    //               >{value}
+    //               </Item>
+    //             </Grid>
+    //           ))}
+    //         </Grid>
+    //       </Box>
+    //     </DialogContent>
+    //   </BootstrapDialog>
+    // </div>
   );
 }
