@@ -13,7 +13,7 @@ import { useLocation } from 'react-router-dom';
 
 const Graphics = () => {
     const [dicCompany, setDicCompany] = useState(null)
-    const [company, setCompany] = useState("")
+    const [position, setPosition] = useState("")
 
     return (
         <Fragment>
@@ -24,7 +24,7 @@ const Graphics = () => {
                         <HomeSideBar />
                     </Row >
                     <Row >
-                        <CardCompany dicCompany={dicCompany} company={company} />
+                      <CardCompany dicCompany={dicCompany} setPosition={setPosition} position={position}/>
                     </Row>
                 </Col>
                 <Col className="show-grid" xs={10} md={10}>
@@ -34,7 +34,7 @@ const Graphics = () => {
                         margin: '0px 0px 20px 0px',
                         alignContent: 'space-between'
                     }}>
-                        <ToggleCompanies setDicCompany={setDicCompany} setCompany={setCompany} />
+                      <ToggleCompanies setDicCompany={setDicCompany} />
                     </Row>
                     <Row style={{
                         display: 'flex',
@@ -44,12 +44,12 @@ const Graphics = () => {
                     }}>
                         <Col className="show-grid" xs={5} md={5}>
                             <Row style={{ margin: '0px 20px 10px 0px', display: 'flex' }}>
-                                <BarByCompany />
+                              <BarByCompany dicCompany={dicCompany} position={position}/>
                             </Row>
                         </Col>
                         <Col className="show-grid" xs={5} md={5}>
                             <Row style={{ margin: '0px 20px 10px 0px', display: 'flex' }}>
-                                <DouByCompany />
+                              <DouByCompany dicCompany={dicCompany} position={position}/>
                             </Row>
                         </Col>
                     </Row>
