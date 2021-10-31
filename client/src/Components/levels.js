@@ -16,7 +16,7 @@ const Levels = () => {
         maxWidth: 360
       }}
     >
-      <ListItem sx={{ bgcolor: "#E4D8DC" }}>
+          <ListItem sx={{ bgcolor: "#DEE0E6" }}>
         <ListItemText primary="Levels" className="text-center" />
       </ListItem>
       <Divider />
