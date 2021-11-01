@@ -53,8 +53,10 @@ const GeneralInfo = () => {
                         </Row>
                     </Col>
                 </Row>
+                <Row>
+                    <FooterBar />
+                </Row>
             </Fragment>
-            <FooterBar />
 
         </div >
     );

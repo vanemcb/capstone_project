@@ -72,7 +72,6 @@ const Home = () => {
                     </Col>
                 </Row>
                 <Row>
-
                     <FooterBar />
                 </Row>
             </Fragment>

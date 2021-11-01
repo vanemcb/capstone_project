@@ -9,7 +9,7 @@ import linkedin from './images/linkedin.png'
 
 const FooterBar = () => {
     return (
-        <div >
+        <div style={{ position: 'relative', minHeight: '20vh' }}>
             <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', position: 'absolute', width: '100%', bottom: '0%'}}>
                 <Fragment>
                     <div class="col-auto - variable width content">
