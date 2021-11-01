@@ -235,6 +235,7 @@ app.get("/by_company/:company", async (req, res) => {
 			const benefits = [...new Set(surveys.map(item => item.compensation))];
 			const benefits_list = functions.remove_null(benefits)
 			const salary_company = functions.company_salary(surveys)
+			const salaries_by_level = functions.salaries_by_position(surveys) // aca va lista por nivel por cargo
 			const salaries_list = []
 			const bonus_list = []
 			for (salaries of surveys) {
@@ -251,7 +252,8 @@ app.get("/by_company/:company", async (req, res) => {
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies list": companies_list
+				"companies list": companies_list,
+				"salaries_by_level": salaries_by_level
 			});
 		} catch (err) {
 			console.log(err);

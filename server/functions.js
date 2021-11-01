@@ -99,6 +99,35 @@ function salaries_level(survey) {
 	return company_salaries
 }
 
+//Returns a list of salaries by position by level
+function salaries_by_position(survey) {
+	const company_salaries = {}
+	const position_salaries = {}
+	const position_bonus = {}
+	dollar = get_rate()
+	survey.forEach(e => {
+		company_salaries[e.dataValues.title] = {}
+		position_salaries[e.dataValues.title] = []
+		position_bonus[e.dataValues.title] = []
+	})
+	survey.forEach(e => company_salaries[e.dataValues.title][e["dataValues"]["level"]] = [])
+	survey.forEach(e => {
+		const usd_salary = to_dollars(e)
+		company_salaries[e.dataValues.title][e.dataValues.level].push(usd_salary)
+		position_salaries[e.dataValues.title].push(usd_salary)
+		position_bonus[e.dataValues.title].push(bonus_to_dollars(e))
+	})
+	for (salaries in position_salaries) {
+		company_salaries[salaries]['average_salary'] = average(position_salaries[salaries]);
+	}
+	for (bonus in position_bonus) {
+		company_salaries[bonus]['average_bonus'] = average(position_bonus[bonus]);
+	}
+
+
+	return company_salaries
+}
+
 
 //Returns a dictionary containing a list with the median salary per company per level
 // for a given position
@@ -251,6 +280,7 @@ survey_functions.load_file = load_file
 survey_functions.median = median
 survey_functions.random_array = random_array
 survey_functions.salaries_level = salaries_level
+survey_functions.salaries_by_position = salaries_by_position
 
 
 module.exports = survey_functions;

@@ -17,7 +17,7 @@ const HomeSideBar = () => {
                             margin: '5px 5px 5px 5px'
                         }}
                     />
-                    <p style={{ fontSize: '16px', fontStyle: 'italic' }}>
+                    <p style={{ fontSize: '16px', fontStyle: 'italic', color: 'black' }}>
                         Add Your Salary
                     </p>
                 </Button>
