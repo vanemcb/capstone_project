@@ -15,7 +15,7 @@ export default function CardCompany({ dicCompany, setPosition, position } ) {
           {dicCompany !== null ?
             dicCompany.positions_list.map(value => (
               <div className="form-check" key={value}>
-                <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value={value} onChange={handleClickRadio}/>
+                <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value={value} onChange={handleClickRadio} />
                 <label className="form-check-label" >
                 {value}
               </label>

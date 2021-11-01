@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PopoverCompanies from "./PopoverCompanies";
 
-const ToggleCompanies = ({ setDicCompany }) => {
+const ToggleCompanies = ({ setDicCompany, setPosition }) => {
 
   const [companies, setCompanies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const handleClickButton = async (e) => {
+    setPosition("")
     await getInfo(e.target.value)
   };
 
