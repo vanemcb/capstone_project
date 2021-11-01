@@ -1,12 +1,10 @@
-import React, { useEffect, useState, Fragment } from "react";
-import 'bootstrap/dist/css/bootstrap.css';
+import React from "react";
 
 export default function CardCompany({ dicCompany, setPosition, position } ) {
  
   const handleClickRadio = (e) => {
     setPosition(e.target.value);
   };
-
 
   return (
     <div className="card" style={{ width: 288}}>

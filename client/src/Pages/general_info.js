@@ -2,11 +2,8 @@ import React, { Fragment, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
-import BarByCompany from "../Components/BarByCompany"
-import DouByCompany from "../Components/DouByCompany"
 import HomeSideBar from "../Components/home_sidebar"
 import CardCompany from "../Components/CardCompany"
-import ListCompanies from "../Components/ListCompanies";
 import ToggleCompanies from "../Components/ToggleCompanies";
 
 

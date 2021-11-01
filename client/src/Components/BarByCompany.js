@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Bar } from 'react-chartjs-2';
 
 const BarByCompany = ( { dicCompany } ) => {
-
   
   let level_list = [];
-  const company = ""
-  if (dicCompany) {    
+
+  if (dicCompany) {
+
     const l = {"L0":0, "L1":0, "L2":0, "L3":0, "L4":0, "L5":0};
-    const company = dicCompany.company_name;
-    console.log(company)
+
     for (const key in l) {
       if (key in dicCompany.company_median_salary[dicCompany.company_name]) {
         l[key] = dicCompany.company_median_salary[dicCompany.company_name][key];
@@ -27,7 +26,7 @@ const BarByCompany = ( { dicCompany } ) => {
           labels: ['L0', 'L1', 'L2', 'L3', 'L4', 'L5'],
           datasets: [
             {
-              label: "hola",
+              label: 'General Median Salary',
               data: level_list,
               backgroundColor: [
                 'rgba(75, 192, 192, 0.5)'

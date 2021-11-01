@@ -1,39 +1,15 @@
-import React, { useEffect, useState, Fragment } from "react";
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
+import React, { useEffect, useState } from "react";
 import PopoverCompanies from "./PopoverCompanies";
-import { Link } from 'react-router-dom';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 const ToggleCompanies = ({ setDicCompany }) => {
 
   const [companies, setCompanies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [button, setButton] = useState("")
-
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClickButton = async (e) => {
-    console.log("ENTREEEEE")
     await getInfo(e.target.value)
   };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   useEffect(() => {
     fetch("http://localhost:5000/by_company")
@@ -71,7 +47,7 @@ const ToggleCompanies = ({ setDicCompany }) => {
 
   return (
 
-    <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div className="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
       {companies && companies.companies_list ?
         companies.companies_list.slice(0, 5).map(value => (
           <button 
@@ -79,7 +55,8 @@ const ToggleCompanies = ({ setDicCompany }) => {
             type="button"
             onClick={handleClickButton}
             value={value}
-            key={value}>
+            key={value}
+            style={{width: 150}}>
               {value}
           </button>
         )): null
@@ -90,7 +67,7 @@ const ToggleCompanies = ({ setDicCompany }) => {
         data-toggle="modal"
         data-target="#exampleModalCenter"
         >
-          More +
+          <h6>+</h6>
       </button>
       <PopoverCompanies companies={companies} handleClickButton={handleClickButton}/>
     </div>

@@ -1,19 +1,12 @@
 import React, { Fragment } from "react";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
-import ListLevels from "../Components/ListLevels";
 import { Row, Col } from "react-bootstrap";
 import HomeSideBar from "../Components/home_sidebar";
-import ListCompanies from "../Components/ListCompanies";
 import Levels from "../Components/levels";
-import Grid from '@mui/material/Grid';
-
-
 import FreeSoloCreateOption from "../Components/searchbar";
 import ToggleCompanies from "../Components/ToggleCompanies"
 import { height } from "@mui/system";
-
-
 
 const Home = () => {
 
@@ -39,33 +32,32 @@ const Home = () => {
                                 display: 'flex',
                                 flexWrap: 'wrap',
                                 margin: '00px 00px 00px 00px',
-                                alignContent: 'space-between'
+                                paddingLeft: 0,
+                                paddingRight: 0
                             }}>
-                                <Levels />
+                                
                             </Col >
                             <Col xs={11} md={11}>
                                 <Row className="ahow-grid" style={{
                                     display: 'flex',
                                     flexWrap: 'wrap',
-                                    margin: '00px 00px 00px 00px',
-                                    alignContent: 'space-between'
+                                    margin: '00px 00px 00px 00px' 
                                 }}>
-                                    <Col  >
+                                    <Col style={{paddingLeft: 0, paddingRight: 0}}>
                                         <Levels />
                                     </Col>
-                                    <Col >
+                                    <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
                                         <Levels />
                                     </Col>
-                                    <Col>
+                                    <Col style={{paddingLeft: 0, paddingRight: 0}}>
                                         <Levels />
                                     </Col>
-                                    <Col >
+                                    <Col style={{paddingLeft: 0, paddingRight: 0}} >
                                         <Levels />
                                     </Col>
-                                    <Col >
-                                        <Levels />
+                                    <Col style={{paddingLeft: 0, paddingRight: 0}}>
+                                      <Levels />
                                     </Col>
-
                                 </Row>
                             </Col >
                         </Row>
