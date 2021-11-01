@@ -37,7 +37,7 @@ const Graphics = () => {
                                 margin: '10px 0px 30px 0px',
                                 alignContent: 'space-between'
                             }}>
-                                <ToggleCompanies setDicCompany={setDicCompany} />
+                              <ToggleCompanies setDicCompany={setDicCompany} setPosition={setPosition} />
                             </Row>
                             {/* graphics container */}
                             <Row style={{
@@ -53,7 +53,10 @@ const Graphics = () => {
                                 </Col>
                                 <Col className="show-grid" xs={6} md={6}>
                                     <Row style={{ margin: '0px 20px 10px 0px', display: 'flex' }}>
-                                        <DouByCompany dicCompany={dicCompany} />
+                                      {position === "" ?
+                                        <DouByCompany dicCompany={dicCompany} /> :
+                                        <DouByPosition dicCompany={dicCompany} position={position} />
+                                      }
                                     </Row>
                                 </Col>
                             </Row>
