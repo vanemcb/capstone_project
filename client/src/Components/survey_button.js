@@ -8,6 +8,7 @@ const SurveyButton = () => {
         <Button className='btn hover-shadow' href="/add_salary" style={{
             width: '140px',
             background: '#DEE0E6',
+            borderColor: "#B0B0B000",
             margin: 'auto',
             fontSize: '18px',
             position: 'relative'

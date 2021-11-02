@@ -10,7 +10,7 @@ export default function CardCompany({ dicCompany, setPosition, position } ) {
     <div className="card" style={{ width: 288}}>
       <div className="card-body">
         <h5 className="card-title text-center">{dicCompany !== null && dicCompany.company_name ? dicCompany.company_name : "Select company"}</h5>
-        <h6 className="card-subtitle mb-2 text-muted text-center">#{position ? position : "GENERAL INFORMATION"}#</h6>
+              <h6 className="card-subtitle mb-2 text-muted text-center">{position ? position : "Filter by Position"}</h6>
         <div className="card-text">
           {dicCompany !== null ?
             dicCompany.positions_list.map(value => (
@@ -20,7 +20,7 @@ export default function CardCompany({ dicCompany, setPosition, position } ) {
                 {value}
               </label>
             </div>
-            )) : "No data"}
+            )) : "No Position Available"}
         </div>
       </div>
     </div>

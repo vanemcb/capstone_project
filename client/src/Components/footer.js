@@ -11,7 +11,7 @@ const FooterBar = () => {
     return (
         <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', width: '100%', bottom: '0%' }}>
             <Fragment>
-                <div className="col-auto - variable width content">
+                <Col md={3} >
                     <Navbar.Brand href="#LinkToBrandingPage">GET TO KNOW US BETTER!!</Navbar.Brand>
                     <Nav
                         className="me-auto my-2 my-lg-0"
@@ -25,70 +25,61 @@ const FooterBar = () => {
                             &copy; {new Date().getFullYear()} PanDevs - All Rights Reserved
                         </p>
                     </Nav>
-                </div>
-                <Col className="show-grid">
+                </Col>
+                <Col md={7} className="show-grid justify-content-md-center" style={{ display: 'flex' }} >
                     <Nav
-                        className="me-auto my-2 my-lg-0"
+                        className="my-2 my-lg-0"
                         style={{
                             maxHeight: '65px',
                             minHeight: '5px'
                         }}
                     >
                         {/*Julian Info*/}
-                        <Col xs={4} md={4}>
+                        <Col xs={4} md={4} style={{ width: '120px' }}>
                             <Image src={beard}
                                 className='hover-shadow rounded-circle'
                                 height='40'
+                                style={{ margin: '0px 0px 0px 25px' }}
                             />
-                            <Nav.Link href="#action7" style={{ height: '20px', fontSize: '10px' }}>Julian Tabares</Nav.Link>
+                            <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
+                                Julian Tabares
+                            </Row>
                         </Col>
                         {/*Vanesa Info*/}
-                        <Col xs={4} md={4} className="show-grid" style={{ display: 'flex' }}>
-                            <Row>
-                                <Col md={6} className="show-grid">
-                                    <Image src={woman}
-                                        className='hover-shadow rounded-circle'
-                                        height='40'
-                                        align-items='right'
-                                    />
-                                </Col>
-                                <Col style={{ display: 'flex' }}>
-                                    <Image src={linkedin}
-                                        className='hover-shadow'
-                                        height='20'
-                                        align-item='right'
-                                    />
-                                    <Image src={github}
-                                        className='hover-shadow'
-                                        height='20'
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <p style={{ fontSize: '12px', fontStyle: 'italic' }}>Vanessa Mususue</p>
+                        <Col xs={4} md={4} style={{ width: '120px' }} >
+                            <Image src={woman}
+                                className='hover-shadow rounded-circle'
+                                height='40'
+                                style={{ margin: '0px 0px 0px 25px' }}
+                            />
+                            <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
+                                Vanessa Mususue
                             </Row>
                         </Col>
                         {/*Alexander Info*/}
-                        <Col xs={4} md={4}>
+                        <Col xs={4} md={4} style={{ width: '120px' }}>
                             <Image src={man}
                                 className='hover-shadow rounded-circle'
                                 height='40'
+                                style={{ margin: '0px 0px 0px 25px' }}
                             />
-                            <Nav.Link href="#action7" style={{ height: '20px', fontSize: '10px' }}>Alexander Cardona</Nav.Link>
+                            <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
+                                Alexander Cardona
+                            </Row>
                         </Col>
                     </Nav>
                 </Col>
-                <div className="col-auto - variable width content">
+                <Col md={2}>
                     <Nav
                         className="ml-auto my-2 my-lg-0"
                         style={{ maxHeight: '70px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="LinkToTechstars">TechStars</Nav.Link>
-                        <Nav.Link href="LinkToHolberton">Holberton</Nav.Link>
+                        <Nav.Link href="https://www.techstars.com/" style={{ fontSize: '16px', fontStyle: 'italic', justifyContent: 'center' }}>TechStars</Nav.Link>
+                        <Nav.Link href="https://www.holbertonschool.com/" style={{ fontSize: '16px', fontStyle: 'italic', justifyContent: 'center' }}>Holberton</Nav.Link>
 
                     </Nav>
-                </div>
+                </Col>
             </Fragment>
         </Navbar>
     )

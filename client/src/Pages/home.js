@@ -9,6 +9,7 @@ import ToggleCompanies from "../Components/ToggleCompanies"
 import { height } from "@mui/system";
 
 const Home = () => {
+    const level = ["L0", "L1", "L2", "L3", "L4", "L5"];
 
     return (
         <div>
@@ -33,21 +34,30 @@ const Home = () => {
                                 <ToggleCompanies />
                             </Row>
                             <Row className="show-grid" xs={10} md={10} >
-                                <Col xs={1} md={1} style={{
-                                    display: 'flex',
-                                    flexWrap: 'wrap',
-                                    margin: '00px 00px 00px 00px',
-                                    paddingLeft: 0,
-                                    paddingRight: 0
-                                }}>
 
-                                </Col >
-                                <Col xs={11} md={11}>
-                                    <Row className="ahow-grid" style={{
+                                <Col xs={12} md={12}>
+                                    <Row className="show-grid" style={{
                                         display: 'flex',
                                         flexWrap: 'wrap',
-                                        margin: '00px 00px 00px 00px'
+                                        margin: '00px 100px 00px 100px'
                                     }}>
+                                        <Col xs={1} md={1} style={{
+                                            display: 'flex',
+                                            flexWrap: 'wrap',
+                                            margin: '00px 00px 00px 00px',
+                                            paddingLeft: 0,
+                                            paddingRight: 0
+                                        }}>
+                                            <ul className="list-group text-center" style={{ width: '100%', margin: '00px 00px 0px 00px' }}>
+                                                <li className="list-group-item active" style={{
+                                                    background: "#DEE0E6", color: "black", borderColor: "white"
+                                                }}>Levels</li>
+                                                {level.map(value => (
+                                                    <li className="list-group-item" style={{ height: '60px', background: "#DEE0E6", borderColor: "white" }}>{value}</li>
+                                                ))}
+
+                                            </ul>
+                                        </Col >
                                         <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
                                             <Levels />
                                         </Col>
@@ -60,6 +70,7 @@ const Home = () => {
                                         <Col style={{ paddingLeft: 0, paddingRight: 0 }} >
                                             <Levels />
                                         </Col>
+
                                     </Row>
                                 </Col >
                             </Row>

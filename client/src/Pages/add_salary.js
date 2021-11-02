@@ -6,9 +6,13 @@ import FooterBar from "../Components/footer";
 const AddSalary = () => {
     return (
         <div>
-            <Navigation />
-            <Survey />
-            <FooterBar />
+            <div>
+                <Navigation />
+                <Survey />
+            </div>
+            <div className='fixed-bottom'>
+                <FooterBar />
+            </div>
         </div>
     );
 };
