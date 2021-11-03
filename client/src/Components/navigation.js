@@ -36,26 +36,11 @@ const Navigation = () => {
 
                     <Nav
                         className="ml-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        style={{ maxHeight: '40px' }}
                     >
+                        <Profile />
                         <LogIn />
                         <LogOut />
-                        <Profile />
-                        <Button className='btn hover-shadow' href="/log_in/" style={{
-                            background: '#81A9BD',
-                            border: 'none',
-                            fontSize: '18px',
-                            color: 'black'
-                        }}>
-                            <Image src={account}
-                                className='rounded-circle'
-                                height='28'
-                                style={{
-                                    margin: '0px 10px 0px 0px'
-                                }}
-                            />
-                            Log In
-                        </Button>
                     </Nav>
                 </Container>
             </Navbar>

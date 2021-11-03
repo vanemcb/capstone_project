@@ -74,8 +74,10 @@ const FooterBar = () => {
                         style={{ maxHeight: '70px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="https://www.techstars.com/" style={{ fontSize: '16px', fontStyle: 'italic', justifyContent: 'center' }}>TechStars</Nav.Link>
-                        <Nav.Link href="https://www.holbertonschool.com/" style={{ fontSize: '16px', fontStyle: 'italic', justifyContent: 'center' }}>Holberton</Nav.Link>
+                  
+              <Nav.Link href="https://www.holbertonschool.com/" style={{
+                fontSize: '16px', fontStyle: 'italic', justifyContent: 'center', display: "flex",
+                alignItems: 'center', }}>Holberton</Nav.Link>
 
                     </Nav>
                 </Col>

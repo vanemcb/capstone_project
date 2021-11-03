@@ -8,7 +8,7 @@ import AddSalary from './Pages/add_salary';
 import Graphics from './Pages/charts';
 import GeneralInfo from './Pages/general_info';
 import InProcess from './Pages/in_process';
-import LogIn from './Pages/log_in';
+
 
 function App() {
     return (
@@ -34,9 +34,6 @@ function App() {
                 <InProcess />
             </Route>
 
-            <Route path="/log_in" exact>
-                <LogIn />
-            </Route>
 
         </Router>
 
