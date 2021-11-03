@@ -40,19 +40,12 @@ const GeneralInfo = () => {
                             <Row style={{
                                 display: 'flex',
                                 flexWrap: 'wrap',
-                                margin: '0px 0px 20px 0px',
+                                margin: '70px 150px 00px 150px',
                                 alignContent: 'space-between'
                             }}>
                               <BarByFilter dicFilter={dicFilter} filter={filter}/>
                             </Row>
-                            {/* <Row style={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                margin: '0px 0px 20px 0px',
-                                alignContent: 'space-between'
-                            }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras varius sem dictum nulla blandit molestie. Phasellus finibus dui fringilla, aliquet tortor lacinia, blandit purus. Phasellus risus enim, luctus in aliquet ornare, vulputate non purus. Phasellus eu metus et augue porta mollis vel non lectus. Cras sed tellus felis. Nullam in ante non elit ultricies consectetur vel sed magna. Phasellus condimentum facilisis lectus, vel congue est aliquet ut. Donec vitae sapien massa. Nam sem est, mollis id semper ut, aliquam a metus. Aliquam porttitor bibendum arcu, at suscipit magna ultricies eget. Nulla eu purus id eros auctor eleifend id sit amet metus. Nunc molestie viverra nulla eget pretium. Donec quis tellus a eros rutrum gravida. Nunc congue ante ac odio sodales bibendum. Morbi et tellus nibh. Pellentesque quis semper elit, sit amet vestibulum nunc.
-                            </Row> */}
+            
                         </Col>
                     </Row>
                 </Fragment>

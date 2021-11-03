@@ -11,7 +11,7 @@ const FooterBar = () => {
         <Navbar style={{ sticky: "bottom", background: '#DEE0E6', height: '70px', width: '100%', bottom: '0%' }}>
             <Fragment>
                 <Col md={3} >
-                    <Navbar.Brand href="#LinkToBrandingPage">GET TO KNOW US BETTER!!</Navbar.Brand>
+                    <Navbar.Brand>GET TO KNOW US BETTER!!</Navbar.Brand>
                     <Nav
                         className="me-auto my-2 my-lg-0"
                         style={{
@@ -35,33 +35,33 @@ const FooterBar = () => {
                     >
                         {/*Julian Info*/}
                         <Col xs={4} md={4} style={{ width: '120px' }}>
-                            <Image src={beard}
+                            <a href="https://www.linkedin.com/in/julian-tabares-3691b0206/"><Image src={beard}
                                 className='hover-shadow rounded-circle'
                                 height='40'
                                 style={{ margin: '0px 0px 0px 25px' }}
-                            />
+                            /></a>
                             <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
                                 Julian Tabares
                             </Row>
                         </Col>
                         {/*Vanesa Info*/}
                         <Col xs={4} md={4} style={{ width: '120px' }} >
-                            <Image src={woman}
+                            <a href="linkedin.com/in/vanessa-mususué-castro-579624158"><Image src={woman}
                                 className='hover-shadow rounded-circle'
                                 height='40'
                                 style={{ margin: '0px 0px 0px 25px' }}
-                            />
+                            /></a>
                             <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
                                 Vanessa Mususue
                             </Row>
                         </Col>
                         {/*Alexander Info*/}
                         <Col xs={4} md={4} style={{ width: '120px' }}>
-                            <Image src={man}
+                            <a href="https://www.linkedin.com/in/alexander-cardona-2501761a6/"><Image src={man}
                                 className='hover-shadow rounded-circle'
                                 height='40'
                                 style={{ margin: '0px 0px 0px 25px' }}
-                            />
+                            /></a>
                             <Row style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center' }}>
                                 Alexander Cardona
                             </Row>
@@ -74,10 +74,11 @@ const FooterBar = () => {
                         style={{ maxHeight: '70px' }}
                         navbarScroll
                     >
-                  
-              <Nav.Link href="https://www.holbertonschool.com/" style={{
-                fontSize: '16px', fontStyle: 'italic', justifyContent: 'center', display: "flex",
-                alignItems: 'center', }}>Holberton</Nav.Link>
+
+                        <Nav.Link href="https://www.holbertonschool.com/" style={{
+                            fontSize: '16px', fontStyle: 'italic', justifyContent: 'center', display: "flex",
+                            alignItems: 'center',
+                        }}>Holberton</Nav.Link>
 
                     </Nav>
                 </Col>
