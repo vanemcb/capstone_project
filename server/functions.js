@@ -128,7 +128,6 @@ function salaries_by_position(survey) {
 	return company_salaries
 }
 
-
 //Returns a dictionary containing a list with the median salary per company per level
 // for a given position
 function postion_salary(survey) {

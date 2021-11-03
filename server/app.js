@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require("cors");
 const functions = require('./functions.js')
-const { sequelize, survey, user, Files } = require('./models')
+const { sequelize, survey, users, Files } = require('./models')
 const cron = require('node-cron');
 const axios = require('axios');
 const fs = require('fs');
@@ -11,7 +11,7 @@ const app = express()
 app.use(cors());
 app.use(express.json())
 
-//CRON.SCHEDULE, checks everyday at hour: 1, whats the current 
+//CRON.SCHEDULE, checks everyday at hour: 1, whats the current
 //exchange rate for 1 US Dollar in Colombian Pesos
 // the follow schema shows how to set the time of the cron job
 // # ┌────────────── second(optional)
@@ -101,14 +101,19 @@ app.get("/survey/:id", async (req, res) => {
 });
 
 //links a survey to a user
-app.put("/survey_registry/:id", async (req, res) => {
-	const survey_id = req.params.id;
-	const { user_id } = req.body;
+app.put("/survey_registry/:s_id/:u_id", async (req, res) => {
+	const s_id = req.params.s_id;
+	const u_id = req.params.user_id;
 	try {
-		const surveys = await survey.findOne({ where: { id: id } })
-		surveys.user_id = survey_id
-		await surveys.save()
-		return res.json(surveys)
+		const surveys = await survey.findOne({ where: { id: s_id } })
+		if (surveys) {
+			const user = await users.findOne({ where: { id: u_id } })
+			if (user) {
+				surveys.user_id = u_id;
+				surveys.save();
+				return res.json(surveys)
+			}
+		}
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'survey not found' });
@@ -177,21 +182,22 @@ app.get("/", async (req, res) => {
 	}
 });
 
-//returns all company names, picks a random company and gets its non-salary benefits
-// positions, median salary, average salary and bonus
+//returns all company names, picks a random company and gets the non-salary benefits
+// positions, median salary, average salary and bonus for such company
 app.get("/by_company", async (req, res) => {
 	try {
 		const all_survey = await survey.findAll()
 		const companies_list = [...new Set(all_survey.map(item => item.company))];
-		const random_company = functions.random_array(companies_list)
+		const company_name = functions.random_array(companies_list)
 		try {
 			const surveys = await survey.findAll({
-				where: { company: random_company }
+				where: { company: company_name }
 			});
 			const positions_list = [...new Set(surveys.map(item => item.title))];
 			const benefits = [...new Set(surveys.map(item => item.compensation))];
 			const benefits_list = functions.remove_null(benefits)
 			const salary_company = functions.company_salary(surveys)
+			const salaries_by_level = functions.salaries_by_position(surveys) //
 			const salaries_list = []
 			const bonus_list = []
 			for (salaries of surveys) {
@@ -202,13 +208,14 @@ app.get("/by_company", async (req, res) => {
 			const average_salary = functions.average(salaries_list);
 			const average_bonus = functions.average(bonus_list);
 			return res.json({
-				"company_name": random_company,
+				"company_name": company_name,
 				"company_median_salary": salary_company,
 				"average_salary": average_salary,
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies_list": companies_list
+				"companies list": companies_list,
+				"salaries_by_level": salaries_by_level
 			});
 		} catch (err) {
 			console.log(err);
@@ -235,7 +242,7 @@ app.get("/by_company/:company", async (req, res) => {
 			const benefits = [...new Set(surveys.map(item => item.compensation))];
 			const benefits_list = functions.remove_null(benefits)
 			const salary_company = functions.company_salary(surveys)
-			const salaries_by_level = functions.salaries_by_position(surveys) // aca va lista por nivel por cargo
+			const salaries_by_level = functions.salaries_by_position(surveys) //
 			const salaries_list = []
 			const bonus_list = []
 			for (salaries of surveys) {
@@ -354,13 +361,14 @@ app.get("/filter/:filter", async (req, res) => {
 			"total_xp",
 			"company_location",
 			"coding_learn",
-      "by_company"
+			"by_company"
 		]
 	if (available_filters.includes(filter)) {
 		try {
 			const surveys = await survey.findAll();
 			const general_filters = functions.general_filters(surveys, filter)
 			if (Object.keys(general_filters).length === 0) {
+				console.log("No data found")
 				return res.status(500).json({ message: 'No data found' });
 			}
 			return res.json(general_filters);
@@ -374,20 +382,20 @@ app.get("/filter/:filter", async (req, res) => {
 	}
 });
 
-// Endpoints to deal with users registration, requests and responses ---------------
+// Endpoints to deal with users registration, requests and responses -------------------------------------
 
 //submits a user registration request
 app.post("/user_registry", async (req, res) => {
 	const { name, last_name, username, email, password } = req.body;
 	try {
-		const surveys = await users.create({
+		const user = await users.create({
 			name: name,
 			last_name: last_name,
 			username: username,
 			email: email,
 			password: password
 		});
-		return res.json(surveys.id);
+		return res.json(user);
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json(err);
