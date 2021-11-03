@@ -6,20 +6,22 @@ import income from './images/income.png'
 const SurveyButton = () => {
     return (
         <Button className='btn hover-shadow' href="/add_salary" style={{
-            width: '140px',
-            background: '#DEE0E6',
-            borderColor: "#B0B0B000",
+            width: '160px',
+            background: '#CDF2CA',
+            border: "dashed",
+            borderWidth: "1px",
+            borderColor: "black",
+            height: '40px',
             margin: 'auto',
             fontSize: '18px',
-            position: 'relative'
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            display: 'flex'
         }}>
-            <Image src={income}
-                height='32'
-                style={{
-                    margin: '5px 5px 5px 5px'
-                }}
-            />
-            <p style={{ fontSize: '16px', fontStyle: 'italic', color: 'black' }}>
+            <p style={{
+                fontSize: '18px', fontStyle: 'italic', color: 'black', margin: '0px'
+            }}>
                 Add Your Salary
             </p>
         </Button>

@@ -36,9 +36,27 @@ const Levels = () => {
     return (
 
         <ul className="list-group text-center vertical-align-middle" style={{ width: '100%' }}>
-            <li className="list-group-item active " style={{ background: "#DEE0E6", color: "black", borderColor: "white" }}>{dict ? dict.company_name : "No data"}</li>
+            <li className="list-group-item active " style={{
+                background: "#DEE0E6",
+                color: "black",
+                borderColor: "white",
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex'
+            }}>
+                {dict ? dict.company_name : "No data"}
+            </li>
             {level_list.map(value => (
-                <li className="list-group-item " key={value} style={{ height: '60px', borderRightColor: "#B0B0B000", borderLeftColor: "#B0B0B000" }}>{value} USD</li>
+                <li className="list-group-item " key={value} style={{
+                    height: '60px',
+                    borderRightColor: "#B0B0B000",
+                    borderLeftColor: "#B0B0B000",
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex'
+                }}>
+                    {value} USD
+                </li>
             ))}
         </ul>
     );
