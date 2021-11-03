@@ -25,29 +25,41 @@ const GeneralInfo = () => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 display: 'flex',
-                                fontSize: '40px'
+                                fontSize: '70px',
+                                fontFamily: 'verdana'
                             }}>
                                 UNDER CONSTRUCTION
                             </p>
                         </Row>
-                        <Row style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Image src={panda} style={{ width: '400px' }}
-
-                            />
+                        <Row >
+                            <Col style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                margin: '0px 0px 0px 100px'
+                            }}>
+                                <Image src={panda} style={{ width: '400px' }} />
+                            </Col>
+                            <Col style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <Image src={panda} style={{ width: '400px' }} />
+                            </Col>
+                            <Col style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                margin: '0px 100px 0px 0px'
+                            }}>
+                                <Image src={panda} style={{ width: '400px' }} />
+                            </Col>
                         </Row>
-                        <Row style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            margin: '0px 0px 20px 0px',
-                            alignContent: 'space-between'
-                        }}>
 
-                        </Row>
                     </Row>
                 </Fragment>
             </div >
