@@ -7,6 +7,8 @@ const DouByPosition = ({ dicCompany, position }) => {
   let average_bonus = 0;
 
   if (dicCompany) {
+    console.log(dicCompany)
+    console.log(dicCompany.salaries_by_level)
     average_salary = dicCompany.salaries_by_level[position].average_salary
     average_bonus = dicCompany.salaries_by_level[position].average_bonus;
   }

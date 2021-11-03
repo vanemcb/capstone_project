@@ -344,7 +344,7 @@ app.get("/by_position/:position/:filter", async (req, res) => {
 
 // returns general information of survey population, allowed filters are
 // those listed in the -available_filters- list.
-app.get("/:filter", async (req, res) => {
+app.get("/filter/:filter", async (req, res) => {
 	const filter = req.params.filter;
 	const available_filters =
 		[

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Navigation from "../Components/navigation";
 import FooterBar from "../Components/footer";
@@ -10,12 +10,28 @@ import ToggleCompanies from "../Components/ToggleCompanies"
 import CardBenefits from "../Components/CardBenefits";
 import ScatterByPosition from "../Components/ScatterByPosition";
 import DouByPosition from "../Components/DouByPosition";
+import Chart from "react-google-charts";
 
 
 const Graphics = () => {
     const [dicCompany, setDicCompany] = useState(null)
     const [position, setPosition] = useState("")
-    console.log(position)
+
+    const getInitInfo = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/by_company/");
+        const jsonData = await response.json();
+        setDicCompany(jsonData)
+        return jsonData;
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    useEffect(() => {
+      getInitInfo();
+    }, []);
+
     return (
         <div >
             <div style={{ position: 'relative', minHeight: '100vh' }}>
@@ -48,7 +64,10 @@ const Graphics = () => {
                             }}>
                                 <Col className="show-grid" xs={6} md={6}>
                                     <Row style={{ margin: '0px 20px 10px 0px', display: 'flex' }}>
-                                        <BarByCompany dicCompany={dicCompany} />
+                                      {position === "" ?
+                                        <BarByCompany dicCompany={dicCompany} /> :
+                                        <ScatterByPosition dicCompany={dicCompany} position={position} />
+                                      }
                                     </Row>
                                 </Col>
                                 <Col className="show-grid" xs={6} md={6}>

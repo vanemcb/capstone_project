@@ -172,7 +172,7 @@ function postion_salary_filter(survey, filter) {
 function general_filters(survey, filter) {
 	const general_filter = {}
 	survey.forEach(e => {
-		if (!Object.keys(general_filter)[0]) {
+		if (!Object.keys(survey)[0]) {
 			return ({ filter: "No data available" })
 		}
 		if (typeof general_filter[e["dataValues"][filter]] === 'undefined') {

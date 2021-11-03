@@ -5,7 +5,7 @@ import './App.css';
 //Pages
 import Home from './Pages/home';
 import AddSalary from './Pages/add_salary';
-import Graphics from './Pages/graphics';
+import Graphics from './Pages/charts';
 import GeneralInfo from './Pages/general_info';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
                 <AddSalary />
             </Route>
 
-        <Route path="/graphics" exact>
+        <Route path="/charts" exact>
                 <Graphics />
             </Route>
 
