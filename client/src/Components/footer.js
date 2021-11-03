@@ -3,8 +3,7 @@ import { Nav, Container, Navbar, Image, Row, Col } from 'react-bootstrap'
 import man from './images/man.png'
 import beard from './images/beard-man.png'
 import woman from './images/woman.png'
-import github from './images/github.png'
-import linkedin from './images/linkedin.png'
+
 
 
 const FooterBar = () => {

@@ -57,7 +57,7 @@ const ToggleCompanies = ({ setDicCompany, setPosition }) => {
                         onClick={handleClickButton}
                         value={value}
                         key={value}
-                        style={{ width: 150, background: '#A7C3D1', borderColor: 'white', color: "#424242" }}>
+                        style={{ width: 150, minHeight:"40px", background: '#A7C3D1', borderColor: 'white', color: "#424242" }}>
                         {value}
                     </button>
                 )) : null
@@ -67,9 +67,16 @@ const ToggleCompanies = ({ setDicCompany, setPosition }) => {
                 className="btn btn-secondary"
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
-                style={{ background: '#A7C3D1', borderColor: 'white', color: "#424242" }}
+                style={{
+                    background: '#A7C3D1',
+                    borderColor: 'white',
+                    color: "#424242",
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex'
+                }}
             >
-                <h6>+</h6>
+                +
             </button>
             <PopoverCompanies companies={companies} handleClickButton={handleClickButton} />
         </div>
