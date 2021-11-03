@@ -7,9 +7,6 @@ import Home from './Pages/home';
 import AddSalary from './Pages/add_salary';
 import Graphics from './Pages/graphics';
 import GeneralInfo from './Pages/general_info';
-import PopOver from './Components/Popover';
-
-
 
 function App() {
     return (

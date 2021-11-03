@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Doughnut } from 'react-chartjs-2';
-import { useLocation } from 'react-router-dom';
 
-const DouByCompany = () => {
-  //const { data } = useLocation();
-  const company = "PANDEV";
-  const position = "Full Stack"
-  const [dict, setDict] = useState([]);
-  const getDict = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/by_company/${company}/${position}`);
-      const jsonData = await response.json();
-      setDict(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+const DouByCompany = ({ dicCompany }) => {
+  
+  let average_salary = 0;
+  let average_bonus = 0;
 
-  useEffect(() => {
-    getDict();
-  }, []);
-
+  if (dicCompany) {
+    average_salary = dicCompany.average_salary;
+    average_bonus = dicCompany.average_bonus;
+  }
   return (
     <div>
       <Doughnut
@@ -29,7 +18,7 @@ const DouByCompany = () => {
           datasets: [
             {
               label: 'AVERAGE',
-              data: [ dict.average_salary, dict.average_bonus],
+              data: [average_salary, average_bonus],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',

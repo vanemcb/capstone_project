@@ -12,7 +12,8 @@ const Navigation = () => {
         <div width='100%'>
             <Navbar expand="lg" sticky="top" style={{ background: '#A7C3D1', height: '70px' }}>
                 <Container fluid>
-                    <Navbar.Brand href="/">SALARY REFERENCE</Navbar.Brand>
+                    <Navbar.Brand href="/" style={{
+                        fontFamily: "Verdana"}}>SALARY REFERENCE</Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">

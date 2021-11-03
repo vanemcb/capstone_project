@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -33,7 +32,7 @@ const Survey = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
-            window.location = "/add_salary";
+            window.location = "/";
         } catch (err) {
             console.error(err.message);
         }
@@ -108,17 +107,17 @@ const Survey = () => {
                                 onChange={e => setPosition(e.target.value)}
                             >
                                 <option value="" disabled defaultValue hidden>Select...</option>
-                                <option value="software_engineer">Software Engineer</option>
-                                <option value="machine_learning">Machine Learning</option>
-                                <option value="security">Security</option>
-                                <option value="full_stack">Full Stack</option>
-                                <option value="api">API</option>
-                                <option value="data">Data</option>
-                                <option value="web_development">Web Development</option>
-                                <option value="qa">QA</option>
-                                <option value="devops">DevOps</option>
-                                <option value="site_reliability">Site_Reliability</option>
-                                <option value="distributed_systems">Distributed Systems</option>
+                                <option value="Software Engineer">Software Engineer</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="Security">Security</option>
+                                <option value="Full Stack">Full Stack</option>
+                                <option value="API">API</option>
+                                <option value="Data">Data</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="QA">QA</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Site Reliabilit">Site Reliability</option>
+                                <option value="Distributed Systems">Distributed Systems</option>
                             </Form.Select>
                         </FloatingLabel>
                     </Form.Group>
@@ -134,12 +133,12 @@ const Survey = () => {
                                 onChange={e => setLevel(e.target.value)}
                             >
                                 <option value="" disabled defaultValue hidden>Select...</option>
-                                <option value="intern">Intern</option>
-                                <option value="junior">Junior</option>
-                                <option value="mid">Mid</option>
-                                <option value="senior">Senior</option>
-                                <option value="leader">Leader</option>
-                                <option value="management_roll">Management Roll</option>
+                                <option value="L0">Intern</option>
+                                <option value="L1">Junior</option>
+                                <option value="L2">Mid</option>
+                                <option value="L3">Senior</option>
+                                <option value="L4">Leader</option>
+                                <option value="L5">Management Roll</option>
                             </Form.Select>
                         </FloatingLabel>
                     </Form.Group>
@@ -219,12 +218,8 @@ const Survey = () => {
                                 onChange={e => setCurrency(e.target.value)}
                             >
                                 <option value="" disabled defaultValue hidden>Select...</option>
-                                <option value="COP">CoP</option>
-                                <option value="USD">U$D</option>
-                                <option value="euro">Euro</option>
-                                <option value="brazilian_real">Brazilian Real</option>
-                                <option value="chilean_peso">Chilean Peso</option>
-                                <option value="argentina_peso">Argentina Peso</option>
+                                <option value="COP">COP</option>
+                                <option value="USD">USD</option>
                             </Form.Select>
                         </FloatingLabel>
                     </Form.Group>
