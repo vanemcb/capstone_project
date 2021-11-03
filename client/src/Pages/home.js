@@ -50,10 +50,26 @@ const Home = () => {
                                         }}>
                                             <ul className="list-group text-center" style={{ width: '100%', margin: '00px 00px 0px 00px' }}>
                                                 <li className="list-group-item active" style={{
-                                                    background: "#DEE0E6", color: "black", borderColor: "white"
-                                                }}>Levels</li>
+                                                    background: "#DEE0E6",
+                                                    color: "black",
+                                                    borderColor: "white",
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    display: 'flex'
+                                                }}>
+                                                    Levels
+                                                </li>
                                                 {level.map(value => (
-                                                    <li className="list-group-item" style={{ height: '60px', background: "#DEE0E6", borderColor: "white" }}>{value}</li>
+                                                    <li className="list-group-item" style={{
+                                                        height: '60px',
+                                                        background: "#DEE0E6",
+                                                        borderColor: "white",
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                        display: 'flex'
+                                                    }}>
+                                                        {value}
+                                                    </li>
                                                 ))}
 
                                             </ul>
