@@ -6,10 +6,10 @@ const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
     return (
         isAuthenticated && (
-            <div style={{ maxHeight: "40px" }}>
+            <div style={{ maxHeight: "40px", maxWidth: "180px" }}>
                 <Fragment>
                     <Row >
-                        <p style={{ fontSize: '18px', fontStyle: 'italic', justifyContent: 'center', fontWeight: 'bold', margin: "0", maxHeight: "25px", maxWidth: "100px" }}>{user.name}</p>
+                        <p style={{ fontSize: '18px', fontStyle: 'italic', justifyContent: 'center', fontWeight: 'bold', margin: "0", maxHeight: "25px" }}>{user.name}</p>
                         <p style={{ fontSize: '12px', fontStyle: 'italic', justifyContent: 'center', margin: "0", maxHeight: "15px" }}>{user.email}</p>
                     </Row>
                 </Fragment>
