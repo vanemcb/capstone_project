@@ -128,7 +128,6 @@ function salaries_by_position(survey) {
 	return company_salaries
 }
 
-
 //Returns a dictionary containing a list with the median salary per company per level
 // for a given position
 function postion_salary(survey) {
@@ -172,7 +171,7 @@ function postion_salary_filter(survey, filter) {
 function general_filters(survey, filter) {
 	const general_filter = {}
 	survey.forEach(e => {
-		if (!Object.keys(general_filter)[0]) {
+		if (!Object.keys(survey)[0]) {
 			return ({ filter: "No data available" })
 		}
 		if (typeof general_filter[e["dataValues"][filter]] === 'undefined') {
