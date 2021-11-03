@@ -214,7 +214,7 @@ app.get("/by_company", async (req, res) => {
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies list": companies_list,
+				"companies_list": companies_list,
 				"salaries_by_level": salaries_by_level
 			});
 		} catch (err) {
@@ -259,7 +259,7 @@ app.get("/by_company/:company", async (req, res) => {
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies list": companies_list,
+				"companies_list": companies_list,
 				"salaries_by_level": salaries_by_level
 			});
 		} catch (err) {
@@ -305,7 +305,7 @@ app.get("/by_company/:company_name/:position", async (req, res) => {
 				"average_bonus": average_bonus,
 				"positions_list": positions_list,
 				"benefits": benefits_list,
-				"companies list": companies_list
+				"companies_list": companies_list
 			});
 		} catch (err) {
 			console.log(err);
